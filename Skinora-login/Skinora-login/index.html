@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skinora — Holistic Health &amp; Appearance</title>
+  <script>
+    /* Live Server / file preview reloads constantly — send users to the real app */
+    (function () {
+      var port = location.port;
+      var host = location.hostname;
+      if (location.protocol === 'file:') {
+        document.write('<style>body{font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;background:#727C6C;color:#F6EFEA;text-align:center;padding:2rem} a{color:#EFE0C9}</style>');
+        document.write('<div><h1>Open Skinora the right way</h1><p>Do not use Live Server or open this file directly.</p><p>Run <strong>START-SERVER.bat</strong>, then open<br><a href="http://localhost:8000/login/">http://localhost:8000/login/</a></p></div>');
+        throw new Error('Use localhost:8000');
+      }
+      if (host === 'localhost' || host === '127.0.0.1') {
+        if (port && port !== '8000') {
+          location.replace('http://localhost:8000/login/');
+        }
+      }
+    })();
+  </script>
+ 
+  <!-- Bootstrap 5 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" />
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+ 
+  <!-- Skinora styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+ 
+  <!-- ═══════════════════════════════════════════
+       THREE.JS CANVAS — 3D BACKGROUND LAYER
+  ════════════════════════════════════════════ -->
+  <canvas id="bg-canvas"></canvas>
+ 
+  <!-- ═══════════════════════════════════════════
+       BOOTSTRAP UI LAYER
+  ════════════════════════════════════════════ -->
+  <div id="ui-layer">
+ 
+    <!-- Server hint (shown when not on port 8000) -->
+    <div id="server-hint" class="server-hint">
+      For full login, start the server and open
+      <a href="http://localhost:8000/login/">localhost:8000/login</a>
+    </div>
+
+    <!-- Brand mark -->
+    <div class="brand-mark">
+      <div class="logotype">SKINORA</div>
+      <div class="tagline">Holistic Health &amp; Appearance</div>
+    </div>
+ 
+    <!-- Glassmorphic login card -->
+    <div class="glass-card" id="login-card">
+ 
+      <!-- Card heading -->
+      <div class="card-header-custom">
+        <div class="signin-label">Welcome Back</div>
+        <h1>Sign In</h1>
+        <div class="divider"></div>
+      </div>
+ 
+      <!-- Login form -->
+      <div>
+ 
+        <!-- Email -->
+        <div class="mb-3">
+          <label class="form-label" for="email-input">Email Address</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fa-regular fa-envelope"></i></span>
+            <input
+              type="email"
+              id="email-input"
+              class="form-control"
+              placeholder="your@email.com"
+              autocomplete="email"
+            />
+          </div>
+        </div>
+ 
+        <!-- Password -->
+        <div class="mb-0">
+          <label class="form-label" for="password-input">Password</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+            <input
+              type="password"
+              id="password-input"
+              class="form-control"
+              placeholder="••••••••••"
+              autocomplete="current-password"
+            />
+            <button class="btn-pw-toggle" id="pw-toggle" type="button" aria-label="Toggle password visibility">
+              <i class="fa-regular fa-eye" id="pw-icon"></i>
+            </button>
+          </div>
+        </div>
+ 
+        <!-- Remember / Forgot row -->
+        <div class="remember-row">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="remember-me" />
+            <label class="form-check-label" for="remember-me">Remember me</label>
+          </div>
+          <a href="#" class="forgot-link">Forgot Password?</a>
+        </div>
+ 
+        <!-- Login button -->
+        <button class="btn-login" type="button" id="login-btn">
+          Log In
+        </button>
+ 
+      </div>
+ 
+      <!-- Card footer -->
+      <div class="card-footer-custom">
+        <p>Don't have an account? <a href="#" id="toggle-auth">Create one</a></p>
+        <div style="margin-top:0.7rem;">
+          <span class="hint-dot"></span>
+          <span class="hint-dot"></span>
+          <span class="hint-dot"></span>
+        </div>
+      </div>
+ 
+    </div><!-- /.glass-card -->
+ 
+  </div><!-- /#ui-layer -->
+ 
+ 
+  <!-- ═══════════════════════════════════════════
+       GENDER SELECTION MODAL (shown after login)
+  ════════════════════════════════════════════ -->
+  <div id="gender-overlay" class="gender-overlay" role="dialog" aria-modal="true" aria-labelledby="gender-title">
+ 
+    <div class="gender-modal" id="gender-modal">
+ 
+      <!-- Header -->
+      <div class="gender-header">
+        <div class="gender-eyebrow">Personalise Your Experience</div>
+        <h2 id="gender-title" class="gender-title">How do you identify?</h2>
+        <p class="gender-subtitle">
+          Skinora tailors your holistic care recommendations<br />based on your profile.
+        </p>
+        <div class="gender-divider"></div>
+      </div>
+ 
+      <!-- Gender option cards -->
+      <div class="gender-options" role="group" aria-label="Select your gender">
+ 
+        <!-- Female -->
+        <button class="gender-card" id="opt-female" data-gender="female" aria-pressed="false">
+          <div class="gender-card-icon female-icon">
+            <i class="fa-solid fa-venus"></i>
+          </div>
+          <div class="gender-card-label">Female</div>
+          <div class="gender-card-sub">Skincare &amp; wellness tailored<br/>to your biology</div>
+          <div class="gender-card-check"><i class="fa-solid fa-check"></i></div>
+        </button>
+ 
+        <!-- Male -->
+        <button class="gender-card" id="opt-male" data-gender="male" aria-pressed="false">
+          <div class="gender-card-icon male-icon">
+            <i class="fa-solid fa-mars"></i>
+          </div>
+          <div class="gender-card-label">Male</div>
+          <div class="gender-card-sub">Grooming &amp; health plans<br/>built for you</div>
+          <div class="gender-card-check"><i class="fa-solid fa-check"></i></div>
+        </button>
+ 
+      </div>
+ 
+      <!-- Prefer not to say link -->
+      <div class="gender-skip-row">
+        <button class="gender-skip" id="gender-skip" type="button">
+          Prefer not to say &nbsp;<i class="fa-solid fa-arrow-right-long"></i>
+        </button>
+      </div>
+ 
+      <!-- Continue button -->
+      <button class="btn-gender-continue" id="btn-gender-continue" type="button" disabled>
+        Continue to Skinora
+      </button>
+ 
+    </div><!-- /.gender-modal -->
+ 
+  </div><!-- /#gender-overlay -->
+ 
+ 
+  <!-- Three.js r128 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+  <!-- Skinora scripts -->
+  <script src="scene.js?v=3"></script>
+  <script src="ui.js?v=4"></script>
+ 
+</body>
+</html>

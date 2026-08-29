@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" contentidth=device-width, initial-scale=1.0">
+    <title>Skinora - Undertone Selector</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="neurocure-tracker.css">
+    <link rel="stylesheet" href="formaface.css">
+</head>
+<body>
+
+    <!-- ═══ ONBOARDING OVERLAY ═══ -->
+    <div id="skOnboarding" class="sk-onboarding">
+
+        <!-- Animated background particles -->
+        <div class="sk-particles" id="skParticles"></div>
+
+        <!-- ── STEP 0 : Welcome ── -->
+        <div class="sk-screen active" id="skStep0">
+            <div class="sk-glow-orb sk-orb1"></div>
+            <div class="sk-glow-orb sk-orb2"></div>
+            <div class="sk-welcome-wrap">
+                <!-- Male avatar icon -->
+                <div class="sk-male-avatar">
+                    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="40" cy="28" r="16" fill="url(#maleGrad)" opacity="0.9"/>
+                        <path d="M12 72c0-15.464 12.536-28 28-28s28 12.536 28 28" fill="url(#maleGrad)" opacity="0.7"/>
+                        <!-- Male symbol -->
+                        <circle cx="62" cy="14" r="7" stroke="white" stroke-width="2.5" fill="none"/>
+                        <line x1="67" y1="9" x2="73" y2="3" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                        <line x1="68" y1="3" x2="73" y2="3" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                        <line x1="73" y1="3" x2="73" y2="8" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="maleGrad" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#60a5fa"/>
+                                <stop offset="100%" stop-color="#818cf8"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <h1 class="sk-welcome-title">Welcome to <span>Skinora</span></h1>
+                <p class="sk-welcome-sub">Your personal grooming &amp; wellness sanctuary, built for <em>men</em></p>
+                <div class="sk-welcome-pills">
+                    <span>💪 Skin</span><span>✨ Glow</span><span>🧘 Wellness</span>
+                </div>
+                <div class="sk-welcome-features">
+                    <div class="sk-feat-row">
+                        <span class="sk-feat-icon">🧴</span>
+                        <span>Personalised skincare routine for your skin type</span>
+                    </div>
+                    <div class="sk-feat-row">
+                        <span class="sk-feat-icon">🍽️</span>
+                        <span>Diet plan tailored to your glow goals</span>
+                    </div>
+                    <div class="sk-feat-row">
+                        <span class="sk-feat-icon">🏋️</span>
+                        <span>Face &amp; neck workouts for a sharper look</span>
+                    </div>
+                    <div class="sk-feat-row">
+                        <span class="sk-feat-icon">🎨</span>
+                        <span>Colour palette based on your undertone</span>
+                    </div>
+                </div>
+                <button class="sk-btn-primary" onclick="skGoTo(1)">
+                    Build My Profile
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+                <p class="sk-welcome-note">5 quick questions &nbsp;·&nbsp; takes under 2 minutes</p>
+            </div>
+        </div>
+
+        <!-- ── STEP 1 : Skin Type ── -->
+        <div class="sk-screen" id="skStep1">
+            <div class="sk-card">
+                <div class="sk-step-label">Step 1 of 5</div>
+                <div class="sk-step-icon sk-step-icon-skin"></div>
+                <h2 class="sk-q-title">What's your skin type?</h2>
+                <p class="sk-q-sub">Think about how your face feels a few hours after washing</p>
+                <div class="sk-options" id="skSkinGrid">
+                    <button class="sk-opt" data-val="oily"        onclick="skPick(this,'skinType')">
+                        <span class="sk-opt-icon">💧</span>
+                        <span class="sk-opt-label">Oily</span>
+                        <span class="sk-opt-hint">Shiny, greasy by midday</span>
+                    </button>
+                    <button class="sk-opt" data-val="dry"         onclick="skPick(this,'skinType')">
+                        <span class="sk-opt-icon">🌵</span>
+                        <span class="sk-opt-label">Dry</span>
+                        <span class="sk-opt-hint">Tight, flaky, rough patches</span>
+                    </button>
+                    <button class="sk-opt" data-val="combination" onclick="skPick(this,'skinType')">
+                        <span class="sk-opt-icon">⚖️</span>
+                        <span class="sk-opt-label">Combination</span>
+                        <span class="sk-opt-hint">Oily T-zone, dry cheeks</span>
+                    </button>
+                    <button class="sk-opt" data-val="sensitive"   onclick="skPick(this,'skinType')">
+                        <span class="sk-opt-icon">🌸</span>
+                        <span class="sk-opt-label">Sensitive</span>
+                        <span class="sk-opt-hint">Reacts easily, redness</span>
+                    </button>
+                    <button class="sk-opt" data-val="normal"      onclick="skPick(this,'skinType')">
+                        <span class="sk-opt-icon">✨</span>
+                        <span class="sk-opt-label">Normal</span>
+                        <span class="sk-opt-hint">Balanced, clear, minimal issues</span>
+                    </button>
+                </div>
+                <div class="sk-nav">
+                    <button class="sk-btn-back" onclick="skGoTo(0)">← Back</button>
+                    <button class="sk-btn-next" id="skNext1" onclick="skGoTo(2)" disabled>Next →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── STEP 2 : Undertone ── -->
+        <div class="sk-screen" id="skStep2">
+            <div class="sk-card">
+                <div class="sk-step-label">Step 2 of 5</div>
+                <div class="sk-step-icon sk-step-icon-tone"></div>
+                <h2 class="sk-q-title">What's your skin undertone?</h2>
+                <p class="sk-q-sub">Look at the veins on your inner wrist in natural light</p>
+                <div class="sk-options sk-options-undertone" id="skUndertoneGrid">
+                    <button class="sk-opt" data-val="warm"    onclick="skPick(this,'undertone')">
+                        <span class="sk-opt-icon">🌅</span>
+                        <span class="sk-opt-label">Warm</span>
+                        <span class="sk-opt-hint">Green veins · golden / peachy</span>
+                    </button>
+                    <button class="sk-opt" data-val="cool"    onclick="skPick(this,'undertone')">
+                        <span class="sk-opt-icon">❄️</span>
+                        <span class="sk-opt-label">Cool</span>
+                        <span class="sk-opt-hint">Blue / purple veins · pink hues</span>
+                    </button>
+                    <button class="sk-opt" data-val="neutral" onclick="skPick(this,'undertone')">
+                        <span class="sk-opt-icon">🌿</span>
+                        <span class="sk-opt-label">Neutral</span>
+                        <span class="sk-opt-hint">Mix of blue &amp; green veins</span>
+                    </button>
+                    <button class="sk-opt" data-val="olive"   onclick="skPick(this,'undertone')">
+                        <span class="sk-opt-icon">🫒</span>
+                        <span class="sk-opt-label">Olive</span>
+                        <span class="sk-opt-hint">Greenish / yellowish tint</span>
+                    </button>
+                </div>
+                <div class="sk-nav">
+                    <button class="sk-btn-back" onclick="skGoTo(1)">← Back</button>
+                    <button class="sk-btn-next" id="skNext2" onclick="skGoTo(3)" disabled>Next →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── STEP 3 : Physical Stats ── -->
+        <div class="sk-screen" id="skStep3">
+            <div class="sk-card">
+                <div class="sk-step-label">Step 3 of 5</div>
+                <div class="sk-step-icon sk-step-icon-body"></div>
+                <h2 class="sk-q-title">A little about your body</h2>
+                <p class="sk-q-sub">Used to calculate your BMI and personalise health advice</p>
+                <div class="sk-inputs">
+                    <div class="sk-input-group">
+                        <label>Age</label>
+                        <input type="number" id="skAge" min="10" max="100" placeholder="e.g. 24" oninput="skCheckStep3()">
+                    </div>
+                    <div class="sk-input-group">
+                        <label>Height (cm)</label>
+                        <input type="number" id="skHeight" min="100" max="250" placeholder="e.g. 175" oninput="skCheckStep3()">
+                    </div>
+                    <div class="sk-input-group">
+                        <label>Weight (kg)</label>
+                        <input type="number" id="skWeight" min="30" max="200" placeholder="e.g. 72" oninput="skCheckStep3()">
+                    </div>
+                </div>
+                <div class="sk-nav">
+                    <button class="sk-btn-back" onclick="skGoTo(2)">← Back</button>
+                    <button class="sk-btn-next" id="skNext3" onclick="skGoTo(4)" disabled>Next →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── STEP 4 : Lifestyle / Smoking ── -->
+        <div class="sk-screen" id="skStep4">
+            <div class="sk-card">
+                <div class="sk-step-label">Step 4 of 5</div>
+                <div class="sk-step-icon sk-step-icon-cycle"></div>
+                <h2 class="sk-q-title">Your lifestyle habits</h2>
+                <p class="sk-q-sub">Helps us personalise your skincare &amp; wellness advice</p>
+                <p class="sk-sub-label">Do you smoke or vape?</p>
+                <div class="sk-options sk-options-sm" id="skSmokingGrid">
+                    <button class="sk-opt" data-val="smoke"   onclick="skPick(this,'smoking')">
+                        <span class="sk-opt-icon">🚬</span>
+                        <span class="sk-opt-label">Yes, I smoke</span>
+                        <span class="sk-opt-hint">Cigarettes / tobacco</span>
+                    </button>
+                    <button class="sk-opt" data-val="vape"    onclick="skPick(this,'smoking')">
+                        <span class="sk-opt-icon">💨</span>
+                        <span class="sk-opt-label">Yes, I vape</span>
+                        <span class="sk-opt-hint">E-cigarette / vape pen</span>
+                    </button>
+                    <button class="sk-opt" data-val="nothing" onclick="skPick(this,'smoking')">
+                        <span class="sk-opt-icon">✅</span>
+                        <span class="sk-opt-label">Neither</span>
+                        <span class="sk-opt-hint">I don't smoke or vape</span>
+                    </button>
+                </div>
+                <div class="sk-nav">
+                    <button class="sk-btn-back" onclick="skGoTo(3)">← Back</button>
+                    <button class="sk-btn-next" id="skNext4" onclick="skGoTo(5)" disabled>Next →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── STEP 5 : Done ── -->
+        <div class="sk-screen" id="skStep5">
+            <div class="sk-done-wrap">
+                <div class="sk-done-ring"></div>
+                <div class="sk-done-icon">💪</div>
+                <h2 class="sk-done-title">Your Glow Profile<br>is Ready, King!</h2>
+                <div class="sk-done-pills" id="skDonePills"></div>
+                <p class="sk-done-sub">Everything inside is personalised for you</p>
+                <button class="sk-btn-primary" onclick="skEnter()">
+                    Enter Your Dashboard
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Top progress bar -->
+        <div class="sk-progress-track"><div class="sk-progress-fill" id="skProgressFill"></div></div>
+    </div>
+    <!-- ═══ END ONBOARDING ═══ -->
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <button class="hamburger-btn" id="menuToggle" aria-label="Toggle menu">
+                <svg class="hamburger-icon" id="hamburgerIcon" viewBox="0 0 24 24">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+                <svg class="close-icon" id="closeIcon" viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <h1>Skinora</h1>
+            <div class="header-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark / light mode">
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+                <button class="header-profile-btn" id="headerProfileBtn" aria-label="Open profile" onclick="skOpenProfile()">
+                    <div class="header-avatar" id="headerAvatar">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside id="sidebar">
+        <nav>
+            <ul>
+                <li><button class="nav-btn active" data-page="dashboard">Dashboard</button></li>
+                <li><button class="nav-btn" data-page="colour-theory">Colour Theory</button></li>
+                <li><button class="nav-btn" data-page="diet">Diet</button></li>
+                <li><button class="nav-btn" data-page="skin-care">Skin Care</button></li>
+                <li><button class="nav-btn" data-page="exercise">Exercise</button></li>
+                <li><button class="nav-btn" data-page="hydra-glow">Hydra Glow</button></li>
+                <li><button class="nav-btn" data-page="neurocure">🧠 NeuroCure</button></li>
+                <li><button class="nav-btn" data-page="formaface">✨ FormaFace</button></li>
+
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Profile Modal -->
+    <div class="sk-profile-overlay" id="skProfileOverlay" onclick="skCloseProfile()"></div>
+    <div class="sk-profile-panel" id="skProfilePanel">
+        <button class="sk-profile-close" onclick="skCloseProfile()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+
+        <!-- DP -->
+        <div class="sk-profile-hero">
+            <div class="sk-dp-wrap" onclick="document.getElementById('skDpInput').click()">
+                <div class="sk-dp-ring"></div>
+                <div class="sk-dp-img" id="skDpImg">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                </div>
+                <div class="sk-dp-edit">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15.232 5.232l3.536 3.536M9 13l-4 1 1-4L15.172 4.828a2 2 0 012.828 2.828L9 13z"/></svg>
+                </div>
+            </div>
+            <input type="file" id="skDpInput" accept="image/*" style="display:none" onchange="skUploadDP(event)">
+            <p class="sk-dp-hint">Tap to change photo</p>
+        </div>
+
+        <!-- Stats row -->
+        <div class="sk-profile-stats" id="skProfileStats"></div>
+
+        <!-- Detail rows -->
+        <div class="sk-profile-details" id="skProfileDetails"></div>
+
+        <!-- Retake quiz -->
+        <button type="button" class="sk-retake-btn" onclick="skRestartOnboarding()">
+            Retake Profile Quiz
+        </button>
+        <button type="button" class="sk-logout-btn" onclick="SkinoraAPI.logout()">
+            Log Out
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Dashboard Home -->
+        <div class="content-page active" id="dashboard">
+            <div class="container">
+                <h2>Welcome to Skinora</h2>
+                <p class="subtitle">Select a section from the menu to get started</p>
+                <!-- Game XP Banner -->
+                <div class="sk3d-xp-banner" id="skXPBanner" style="display:none">
+                    <div class="sk3d-xp-icon">👑</div>
+                    <div class="sk3d-xp-text">
+                        <h4 id="skXPTitle">Your Glow Profile is Active!</h4>
+                        <p id="skXPSub">Personalised insights unlocked below ✨</p>
+                    </div>
+                </div>
+
+
+                <!-- Profile Summary Card -->
+                <div class="sk-dash-profile" id="skDashProfile">
+                    <div class="sk-dash-dp" id="skDashDp" onclick="skOpenProfile()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                    </div>
+                    <div class="sk-dash-info" id="skDashInfo">
+                        <p class="sk-dash-name">My Profile</p>
+                        <p class="sk-dash-sub">Loading your glow profile...</p>
+                    </div>
+                    <button class="sk-dash-view-btn" onclick="skOpenProfile()">View Profile</button>
+                </div>
+
+                <div class="grid">
+                    <button class="card" data-page="colour-theory">
+                        <h3>Colour Theory</h3>
+                        <p>Click to explore</p>
+                    </button>
+                    <button class="card" data-page="diet">
+                        <h3>Diet</h3>
+                        <p>Click to explore</p>
+                    </button>
+                    <button class="card" data-page="skin-care">
+                        <h3>Skin Care</h3>
+                        <p>Click to explore</p>
+                    </button>
+                    <button class="card" data-page="exercise">
+                        <h3>Exercise</h3>
+                        <p>Click to explore</p>
+                    </button>
+                    <button class="card" data-page="hydra-glow">
+                        <h3>Hydra Glow</h3>
+                        <p>Click to explore</p>
+                    </button>
+                    <button class="card" data-page="neurocure">
+                        <h3>🧠 NeuroCure</h3>
+                        <p>Break free from nicotine</p>
+                    </button>
+                    <button class="card" data-page="formaface">
+                        <h3>✨ FormaFace</h3>
+                        <p>AI face scan &amp; style picks</p>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Colour Theory -->
+        <div class="content-page" id="colour-theory">
+            <div class="container">
+                <h2>Colour Theory</h2>
+
+                <div class="undertone-section">
+                    <h3 class="undertone-title">Select Your <span class="highlight">Undertone</span></h3>
+
+                    <div class="undertone-grid">
+                        <!-- Cool Undertone -->
+                        <div class="undertone-card" data-undertone="cool">
+                            <div class="card-inner">
+                                <div class="image-container">
+                                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAE5AYEDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDS8RL/AMVJqYPad/51ShQbjxWl4iX/AIqbVD289/51QhHU14Wp1XH7fahlGBwKfTJ4ySgB69falqCYxYwM88nv2qVJI/uAF39VHFdj8L/hje+PdUCsjJYIRvmI4NfT2h/CHw1oNqIRZJMVHLMOtGpep8Zqxx9z9KYzc/dx+Ffcsfw88MkNnSrYY9qaPh/4b7aRbn6rRqVys+G8Jzkc/Sm/L6fpX3M3w98NL97RrbP0pP8AhXnhrGf7Gt/++aPUOVs+G/p0+lLuCjpz9K+5F+Hfhlh/yB7f/vmk/wCFdeGhz/Y9v/3zQLkZ8OglmHb8KZqFr9os5o9pwyntX3L/AMK98NZB/se3/wC+af8A8K+8Ng/8ge3APqvFPUaTPyX1iM6fqU8JLABs8Cn2N9G3Hzf981+q918HfBV1vmfw5aPJjk7etVIvg34JRlA8NWYYjONtQ73OiLsj86tFu0+Xgj6iuxtLhcJzn8K+7v8AhVPhFBhfD9qv/Aanj+GfhaFcjRLYn0C1SkKWp8caRcRCMBuv0rdt50TtivrRfAPhpcFdGtwn94LUn/CEeHu2kw4/3a3UmiLHzDpdwjS8rke9b9tdGNhgDFfQf/CHaDGn7vTYA3pjFRv4T0Y4AsYVb2FPnHY8d0+43YOMfjWktw27jp9a9Tj8PaUoIWyj49qeNB07aCLSP8qXOx2PNYnPHQfrWhbydyR+Vd8ui2K9LVAfpTxpNovSBfyo52Fjj4tshByoP0q6oX1BP0rpRp1up4iUfhUv2S228wjPtT5wsjn4WJ4wPyqyv7vuPyrV+yRpghBikaOENgr9OKTlca0M0SjHJH5VFNLwcY/KtVYIyfuACn/ZoWbAQfWpNEzmZmf2I+lUp2JGOh9hXZNZxfNmPp0yMZprWNv18sH8KjUtSRwrqShzz+FZl1aZBO3P4V6W1lbqu7ylPbFPSxtC21o1yRnpU3L9okeK32mGdWDxgg1y154dWNmZI+a+lJNN0/gfY4yfpUUmh6awINnET9KNQ9pc+W5LGSPIMOPepoYWVeRX0sfDOlt9+xhP4VH/AMIrpO3H9nw/lU6jVWJ8/W8jR4AHBq8sh4ygA9a90/4RrSo+RYQ8dsVO+g6XhV/s+EMw44ofmV7aPY8Cls7e6Qjylkz14rC1DwPaXSl4m2Oa+lY/DOmNlUsIlc9QBWRq3gGxvonNsggkX24qWtNDWNePY+Y7nwvfac26MMyDvVi11SezwsqMAOteuy6M1nK8E6ZwfTrVe68J2d1Ef3QVjWfKz04VqclscJa+IhJhTwK6HS9VjkkRdw6j+dZ2p+A5Yd7QcgdMCsOxs7yxvl3qwAYfzog5XFOnTcW0e67o/wC6tFYX2x6K6TzeSJ8x+IF/4qLU+P8Alu/86oxL1rT8QL/xUmpf9d3/AJ1n4+ag+fHKtNkUsvH3ycU9elCr+8i/3qAPsr4P6OuieA7FIlVfOG5mxz0FdjlRwDnHWsTwGv8AxRWlj/pitatxMIfMkPAVeaDpiJfahb6bbGe7mhht15aVjjFedX37THw10zUPscviq3aZTtKr2PpXz98Q77xH+1N8YrzwPo2oS6V4S0dv+JhPET5kz5PGf+A/rXrel/sZ/CrT9His5vDkF7PtxJczAeazdznFa6G9j2Lw74s0bxdai50a+hvoW6srAkVq98V4P8Lv2ZV+EPxAuNV8Pa3cW3huRfm0uQ5VW9unv2r1rxn4/wBB+HelnVNdvotNtR2lYAv9BUtEs38baMdq8d8Pfte/DLxJq0VkmrLbs7YRpl2Bj2wTXsi3kFxAkkO2YyYZJM5Djtg1NhET/L7Um8nhq4P4kfHbwb8MpAmvapDDc4z9m3BmX8Ky/hz+0l4G+J199k0rVke+b5fJlIRm+gNMOU77xH4it/COh3usX3/HlZxmWTHoKzvAHjjT/iN4Vs/EGmgmyvMujdwB/wDrrI+Ou0fBvxbjtZOPm+92/SuR/Y9X/jH3wuf+mI/kKdgPZ8gZGa5b4ifEjRvhboLarrlz5VnuAC92bsBXXRwsysx6swNfKv7SjN4++O3gjwI532yMb6Vf90gDP/fVRbUZ9Gf8Jzpdv4Xi168nWw0ySMSq0nA2nua5X/hpD4br8v8AwlFkc/7Zrhv2yLeOP9nvV7VB5cEe2PHqOBWH8If2VfhhqXw28PXl54TtZ7qa0SV5ZEBLkjr0rXoVY9s0P4teD/FcwttJ8QWN1Mf+WYf5jXR3V3bafptzeTEiO3jMrbT1AGa+QP2jv2WfDfgnwZd+M/A27w1rOmA3Cm1G1XA5KnH0r3X4f+Jbnxh+z7p+q3agXVzpbh2ToxG4ZP5VEthWOi+G/wAU9H+K+k3upaOpENpKYX+oJH9K7BV2ooxivnz9ii2RPh7rCH+LUpwfxdq9i8O/ETQ/Fmtaro+m3Be/0x9tzGD0PFKOwNHRjpS1V1jU7bRdJuL+6YLaQqWl9QBVPwT4y0rx94fh1zR38/T5ujZ54/8A10yTZ20mwswxXDfED48eCfhrN5etarFbz7cG1BDSnv061D8N/wBoDwR8UJhbaNqKC94X7NMQshHsDQB3cjsnGM1geIvHWj+Fb6xs9VvUtZ77iFG9Tjj9a3pMy7trd9q56ivAf2zPAM3ir4Ty63pYK63oTi8gYdTtBz/SgpHvkUiNHnO5M8N61Mqo0bEHaAMk+lecfAfxxD8RvhjomrB90vlBJ8dQw65rZ+LHi6DwH8M9a1iRtsoiaOFiccnpTGaWg+OtF8VXU1np96t7c2JKyqv8P1/KtvbnOTu968I/ZE8EyeHPhjHrmoRqmr627XMz4+dVIB5/Wun8YftLfD7wLqB0/UNWWS6B2lLb59p/2sUpAelu20jPQc1538R/jd4d+FOq6Pp+sM/2jVphFCQM4ycVueCfid4d+JFus+hajFfID+8RGGVPuK5n4s6h4BstU8OR+MreO5vp58WBYDhsnFYhY9URopI45I+UdQyn2IprEZyDWN4m8ZaX4G8MNrGqyfZrCBQC6/3ccD6YFcB4w/ah+H3guGF7nU1bzV3LDb/OVU9+K16BY9WzTttcP8LPjN4S+LEcjaBqsd0sXJjLASg/TrXYeIvEWk+EdJuNT1i5jtbNOTLIwAH0zSMGncnbCghlyrDGfSuN+InxG0/4b6PHqepBhZ7vKeT+4O5rhpP2wPhm+pCAaz8pfaJWTCE/Wun+Jml6X8X/AIR61Z2sguLS+tmaGZOnIPI/OlJaG6Wh3ek31vrNnbX9nJut7iISRuO4q591sr6c14V+xt4wm8Q/B2C3uXZ73TrhrUq3UAH/AANe7yL+9B27acY6GblY5PxrYq00MyKAe9c6kEnSuw8UqWhiPvXPxxGnyndSmVYrceYFZc5602+8H219tKja2QSRWjHbls1qWMJTGaapms6rSKP/AAhC/wDPSiup5oq+U4vaM+GNfX/ipNS/67N/OqG3c1aGv/8AIx6l/wBdm/nVJB82T0rJnBoJ5dOEfzRf71OwPWl3fvIwOxqUGh9t+BBjwXph/wCmK07xIzDQ9RZBlhCxH/fJpPAzZ8E6Xn/nitat7bJNBIn3o5F2n8ao6Inyx+wfY28mieMdSnyNQudWcSOx+Yc8fzNfVTqqqA4XPTdz+dfGek6037KXx01u11lZE8IeIZfOinYYihbJ6noOor6u0zx54dv9NF7aa3ZzWzpuD+YCoHXrmqNmzo8K/wAq8YGBno3vXyDoWiJ+0v8AHzX7jXpJJ/Dnh2QQw2e4iOWTj7w/4EK918N/H3wp4r8dSeFtIvhqFxGmJJoSGjVumMivDPhnr0PwD/aD8V6F4kP2PTtek+02t3P8kZYgDAJ7/LT6Ep33PaPHP7PPgjxn4bn05tBtrCeNCLe4tV2NGR3BHp715l+zh8QNW8N/Dfxjo2rXRu7jww0ggmm5d1C/Ln8RXtHxA+MHhX4f+GZ9V1DVrVUEZMamUDzCRnj1rwP9nDw7qvjL4f8AjzXr6za2fxGZFs45lwSoXIb6HNRd3K0Kf7Nnwj0v4sR6n8RvGEDateXt5IkEN0xMcaqxHAz/ALNb/wC0R8AdBt/Ctx4u8NWa6Jr2jf6UJrIlA4HJDDOMfL6Vm/sj/ErS/DOh3/gPxBfR6frmm3s2yK5cJuVnYggH6iuo/ah+MuiaD8Or7QrW9gu9b1ZfssNrbuGZ9wx0/GhsvQ0Lrxo3jz9lTUtWkcSSvprRyOO7A4P8q1f2P1H/AAz74WH/AEwH8hXKQ+FZvAf7I17p08bRSnTnldCMY3Enn866v9j2YN+z34VIH/LFf5CmnoZyt0Pa42PAHPOK+UtLYa7+2xrTyKZH06zjVM/w7lQ/0r6pjkMfI6g5HvXyro7HQf23tXWVtv8Aalgkq++1Yx/Whijsdn+2juX9n3XGVN7gKVU9zmvHvh38UPjxZ+BtFi0rwVa3ljFZoIJt/JGB/tV7J+2V+8/Z/wBdGScbD+tbnwN8WaLH8KPDKvrFupWyjVkEgGDjoa2jtqXc+VvjB4w+Nni7S4bHx1oy+H/Ckzqbue1wSE/iHBPavrrwm2kt8HYYtFkWfRotNZIHTt8pz+Oc1g/Hj4oeDND+G2tf2vrNm8UluyrbmYOXJBwAPWvP/wBkG11a1/Z11qbUEeK0uDPLZLLkHyyDgY9OtZsLnQfsVfL4F1vPIGpykf8AfbVy/wCyv5h+PXxY3Z3G549O1dP+xOS3gHWiXXb/AGpKCfT52rz/AODvjCy+Gv7UXjzSNfk/s46tLvtJZjsWQ+gJ69KQj6V+LuF+GniFQoYravubPqK8W/Zr8RHwn+yDFqkYbz7eCWUZ9VQECuv/AGnfixoPgn4X6zazXsMurX0PlwW8bgs2RnIH0rh/2b9Hfxb+x7a2MBJmvLORVI6bigGPrVqwaHn/AOzvH8PPEC3vjbxzqcGqa9eXDkQ3jMyQKGIAUfQCrv7RVt4A02Cx8Z+CNXtdJ8QWNwsgWyLATKTnaRjHb9ap/su+GfhzcaffeF/FWmWdv4l025kVludqtKpYnIBHuK9Z8ZeBvgd4ZuLODWLbToxcTBIYldAxOeOMe9Zahoe0eBtaHiXwjo2rHAlnt1dz6tjBrS1LR49WsZrC4RXgulKFW6YPaoND0+10vSbW0sEEdpEg8lewQjj+dasbZBycsuNmO1NEt2PlD9k+6n+H/wAVvG/w+v3KW32hriwRuu3Hb2+U1pftW6xL468deE/hlZvvW7lWe9WI/djHPP5isP8Aa0hufg78UPDfxR01GW1jxb3+0cbcnJP/AH1Uf7Ksc3xY+JHiX4n3ys9tcHybAuOijHT/AL5plKx6t+0t4uk+EfwXmOjMsHmKljDIo+4G+U/zrhfg7onwg8JeDbaXV9Q0/VtWvU826uL0s77m5IGR+Fdf+1x4K1Dxp8G723soGne0lS7a3iG5ioOSMfQVx3wQ8L/Bb4keEbCZLKxTULaPZdW0zLvV14bIx60r8wmzj9dj8MfC346eGNf+H2qxjS9XlEN1p8DMY9zMvOD9TWr+2xI0njL4Sy8AtqK+3XJr0ez8NfBDTPGmmaTYx2T68rmSCKFlJUgjt+VcJ+2xCv8Awl/wkV9uV1NduOw5xRy23EpHU/trXj237O+rGP721EGfdTUf7OXwF8MWfw10rU9V06PWdRvoxI0t7liAR90D0o/bmhK/s96huG1d0RJ/4Ca9S+DwSP4W+GH7fY0FD2NUz5z+JXgPTfgz+0b4G1DwrD/ZMOsS+XdW8LERng84z7Vsftz30lpr3gldVknj8Htckag0O7AAKY3Y7Hmpv2pLtIfjV8LYWPzPc5A/Bq9t+JvirwCDZ+H/ABrcWXlX64itbzbhz68/WpQtDiLDRvgp4x8PWVjbQ6NPA0aiLblGBx6nBzXqmg+G7HQ9FttMslWOyhj8uJQcjae+a+e/jF+z/wDCvTvAd7q9heR6JcQRGa2e1uAoL9gMYrsv2R9c1nXfgvY3GtvLcSxbljlfJZkHQmmJs5D9jKZrXxR8TdLyPItdTYxr6ZVK+okfzlVuwGK+XP2O7ZrjxF8SdXjB8q61RgjdmAVBkfrX1EG2rtHWqvoYSRk+IFDRoOuKyYoC3at3WId8ak8VRggIHrWsdTaBXjh2t0q7DH8wAp3kjcKni+R+lWy221qWvKNFS+aKKzMrHwhry/8AFQ6j/wBd3/nVML8pq74gyviLUcf89m/maqRnd1rFnACrSSSFUjKr82akpk2FkGORjipHE+0PhrqCal4F0tkYHbGFOPaujVT9zPy184/BH4sW+gpHoupt5duT8jHt+NfR9rcWl9B51tcJJCRkMrZqjojJGD4y8C6J480s2euafDf2+MK0g+cV4Tqf7Cfg68uftEWoahZ25bd5CznH0AHavprykZgTk49QKc0Kt1JPfoKdwcjgvhp8H/DHwzsRFo2lxQSsNr3TgmR/xzV/4j/Cjw78TtNFprVmkxUfJdDiRfoa64R9TvbPv0FCrk5LKaq+gKVj590L9jDwZpOqR3V1Jd6hHG2Y4LuUsh/CvdLXS7XSbGC1tIY7e3gwEjiHC47VfEascFlb03HNMNuPM+8Ap67TU2K5zyD4nfs3eEfilcyXl5YtZ6m55urNtjH61m/Dz9lHwZ4B1ZNREEmp3sZ/dNeP5mD617n9mRmB3kY9BimtaoGUqcFTkEDFJq4ucwfEnhuz8TaJeaNcjdBdRGOVh/CMdP5VX+H3gmx+H/hWw0TTsm0tUGPwFdObeFSWZmBY5NQhYvMY72HYYGBT2WoX5tEPjVGbIPAGB+dfLf7TcEnw++Lngr4kRpi1glFjdnH8DYOT/wB819TiFSBgnjpWH408A6L8RPD82j67B9ptJGB29D9Qe1NalK63M7x94P0v4t+B5NLuilxpepLvDIf4cdK8W/4YV8CReUkF1fxLGmPLjmYKK+kNJ0C00DSLfTrXKWtumyNT1AHvT5IxtADgZ4ODWnNpYdz560T9i/wHpF4t3cR3GpPGQyrcSll+mDXuEOh2lroraTBAiWDReV5UYwEB44FazW6DgMuMAHnmpo7cYyHXpjPesrhc474c/DnT/hjpd1YaUMw3FwbiTPqST/WsL4pfAXwr8XI0m1G0VL6M4W6gysg9816csI+Ygt0waFtwqhlZkGMYXincZ4R4R/ZJ8F+G47n7UJtXlkUxpLduXKg+ma9F+HfgbTfh34Yh0LTIjHZRfcJ6D1rrmjTapXhlPU0yOJdqoG4XOBn1qWTzHkfxO/Zj8H/EzUBe3MJstRkGGnsiUJ+prJ8A/sm+DPBN8L5kuNVuY2Gz7U5cIR0PNe5SR/KBuKYPG04o25Xhs564q1YdyOFQqgIMlBtY9sdhUgjDc/dqTH3eg29AOM/Wl529qdidZbHLfEbwBpHxM8J3eg6tELi1mGGz1X3qj8N/hnpHwp8Jw+H9Gj2WUR37j1PPT9a7TaCp5A7U1iuRlhxwKhstJlaSETRvFLgxSLtZW/iHpXiXjT9kTwR4z1Z72CObR53O6RbN2QOfwr3PapBG4Ee9SRxdwQPpUxsiXc8t+F/7OfhD4V3H2uysjdX4PF5cMWkQd8ZNb3xE+Eek/E680OXVFIfR5vtELjuRyK7hmHAPLYoOWBw+3NaN3Js0ch8Sfh3p3xO8J3Hh++B+xyFQxPsCK0dB0SHw/odppFsubS1QKhPoK3RH5aYDe5qtIpLLlsYGBipktDVXOC8cfCXR/HXiPRdcvo2NzpMm+I/n/jR8Tfg54Z+LVrBDr1irS24Cw3MZYMvrXebQcfMeKIz5b5HJ6YJyOahD1Pn7Sf2I/BlnqEU1zeX17BE24RSTkr7DBr0f4sapY/Cf4N6w1mi2SWts0cEMYwfunBHvxXoUf7wk8LkY4FY3i/wRpnja0Ftq0bXdvuDFCxwcVp0Fc8x/Za8Ey+EfhHp7yqTLqTNcyMRhuScZ/KvYo5RwNu0jjmn2tnDY2cVrCqxQRIERF4AA6VDO6RknPNTZk2citqLFm68VHbrwKR5PPk6cVNEoWuiJrGLQky7SCKFcKeetPfnmqsgJYH3psvldjTyKKh3GiosZHw94iX/iotR/67N/OqS8ZrR8QL/xUGo/9dm/nVELwaxPPEprc/L0HrTqbQJsactg56fnWxpvjbXdFj8uyvpIYv7pOax1701qC0zqG+K3iodNWkpn/C2vFmMf2tJXMMtRstBPMdV/wtvxWM/8TaX8Ka3xc8Wf9Bef/vquTZaY3Smg5jrv+FveLAv/ACF58/71Mb4weLiv/IWmP1Nci3Sm4zTDmOsHxf8AFoPOqyfnTJPjH4uBP/E2kxXKstQSrQHMa3iT44eNNP0i6nj1iRSi5FeLw/tP/EieZyNekCg+/wDjXT/EKYW/hm4ycbuK8V0y3G0EDO4VhUlY7KMb6nr2n/tJfEaXGdclI/Gt6x/aC+IDNuk1qUgfWvLtNszHjiulgtvkXoKKcrnRKJ38f7Q/jrA8zWZAM+9asP7QPjBo1zrU9eeLYRMq5GTVyPTU4Arcx5T0qH47+LmxnWJz+Nadv8bvF0uAdWmIPqa8r+yMmNprS093jKhulRLQcY6nrVv8YPE8e0f2nIc9a6Cw+J3iK4UZ1CQ/jXksMgZkrrNNx5YwecVhznbCmup6dY+PNbdMteMR7mtiy8YatJz9qOa4PSWDR4Jro9NVeOa1jqDpxOpXxTqoUb7nINWj4m1FY1P2jHrWBNt8tdrc5qSTcY1z0rWJi0jTuvFmpRsq/asE1DJ4y1NVP+lGsHUHRmVt/TiqrSKy8tVvYUUjfXxtqRU/6STVd/Geqnn7Qa5+STy1ZkOeKhhvCygvwc1jI7oU0zqYfGeqck3Bq7b+N9RXB+0t+Rrl4Jkd9g64qWGTGFxSRt7OJ2kPizUJ8ZuCPfFXrfxBfEf68tXKWu3aOa0YLoR9Oa2SuZypROph1u+k/wCWvFWv7UugoLS5rnYb4bR61pQSebGK05dDmcUjSXVp/wDnp+lSrdT9pDVGOLdV5I6jlFZEsd9OvAkNXYr2YjmTrVBVKnAGRVmOM8E8VVhcqCeac8h+KhDSMfmbNW/LytRSRbBmiwcqRPANuKmb5aq275qSWb5gKnYLCSTbc1Va4BbrxReSdhVCSbaFHfNHMJ7G75woqn5lFHMYHxv4gB/t7Uvadv51QXJxWlrv/Ie1T/rs386z412pzUHAJt9qayj0qUkDtTGFAiPbTWWpB1xSMKBkVMYVJtpCtSIgZaiZeelWGqNl700BFtpu3FTHpTGXIpgRsPlqGQfKGI4zip29KjkUbWyQAozUSJSuzy74taphYrBTnc2SPwri7CxWPyVB5xV/xrdG+8SPht4XipNPtRlW6mueW56UFyo0La3LYw1dBZ2pKLkj8az7G1x1Oa37KPG3K5FWhy2J7W3LcFhV2G29DzU0NurYKqBTtpikGOa1RzyJI7Tau6QcfrV2ztY36cj3psMhbG4Z9q04YllZCF2mmzWmW7fS9yqwNbljazwpkcioNP8Al2hgcV1GnQoycEYrJpHfF6EujRyMD646Vqx3Utm20gk+1T6dpyFNyHDVof2e7LlQsjVaE2Vl1NlVM+tXrjVj5ajPasue3EbhJVZGz3qpqxltITIvzLjtWqRm5IsyzCR+T3pGkjGcniubsdWE0nLd+las10rKSBVvQhWuWY7hQXweKhjlEh2nnmsv7Vgk5xz0qW1nV5GOcVzSZ3U9jZtsrcFgecVo2rCTG5sH0rGhnAY7T2p9vI5k4bvTijY6qMpHjuKvQzR8cVk2bDyQWOTWlG6qR0rRaB0L64ZhtXArf09SqjNYNvJ8w44rdtbgKq5raLOOpsbdtCGA4qwcK2MVTtbgbetW1cSEVRipE6qVGQOtKJCOooVtq9aikkPrSNdy2rcUyRg4IpiN+7qJZcZNJsLBu8tsdDUU02HHzVHPNubjrVC4kZm4bFYtiLV1cbVz15rnNe1oWMJkZvLVcc/jU+oXxijIzkivn/8AaI+Jn9i29ppVvP8A6VcSoDtPQEjrUIxlKyPc/wDhOoP+e/60V4V/pv8Afoqjm5jJ15P+J5qh/wCmzfzrNH3RWprin+3tS/67N/Os9F60ziuRtSHtUrdajZfagLjP4qSTtTsYooC4zaKQrS0jUrBchdajbpUzd6hb71MdxjdKbUh+6KYwzQBFJ96sXxtqg0fw7PcA4YjaK3d2eK8r+M2qPtg02M53HecVnJ2LpK7uefafvuriSVzuZzu5rqNPgePGelc/o9uVPPXoK6+xU7QuKw3Z3mnYqFIzXR26qqLxyazrSzDKMVtW+nuFUhc1qkRKRZtk6CrP2UBsmoId8b4PFaMbButapGTVxLeAM9a0Nvt27etVI1XcMCtzT7csoKfK3YmhmsFY0rO3WSMAjmt3TbNolz2qvp0IMYDrlv71bFojQsNnI71HKdkdi3a+YseVODWlZ3jhcMfL/wBqoVVZIsqcHvUMcvlkoRmnYlo0L6ZJsMw3n1rI1OPzYNobg/w1LMrqpZXz7VVmmRlXd96t4anNP3TLs9JjZmBj2HsaW80+W3iNdXpsMdxCBjmjVNN3RbqqUbhBnmclwYmbcaks7sO3BrT1/SvOXhfmA4xXK2/mW9yyPwR0rhmmj0acjr7SYeZye1X7eTPI6VyttdsrYPFbWn3hZiprJSaOg6uyuN0eD0rSs5hJ36VzUNwVGBWjp90yvmtYyDodfZruwa1YmG4A1zdjfVqwz7mB7V0xZzyidJG4WMc1ctZPLXmsaGYMoqx9oKMB2rXmJUUjX+1Y7ZpDcZ7VRjm3CpPMO01DZdi4Lr5cVGZuKpGXDc1HPcccVm5CcSWaY7qozTHdUU90dw5xnis+/wBSjsbWVnI/djcxJrNtGbVjm/iB4qj8OaXd3lxII4oVL18F+KPG1x468bR3ty2YvtKeV9Nwr0/9oj4tHxNqE+l2J/0OEkMQeprwfRUP9sWRP8U6H/x4VUTzKkrs+4tx9KKZ5JoqzK5zmvHb4g1H/rs386oc4NaGurnXtQ/67N/OqOOKrkvqcrepHg0hqXbUbd6XK0K5GRmk206igLke2mstPprUBciZetRNHz1qZu9RtQO5GV7Uxlz3qRutMPqPXNA7kUzrDBLI3HljJr598VahJrniq5lB3RqxVe+BXs/jrWE0nw/cykgF1x1rwDTZXkZpf4mOaxmdtJHRabbmN1zziumtsEggVh2R+VB1Pet+0XbjvWKOqRt6WzbgK6+wZ2UKAAK5fS4wGGeK67T0IxjpW8TFksdtG8uGHNWJLEr0HFPijHmZNXGVgucgitBGZHGRIFBrpdNUqi7hlawlki+0D5Tmu00SzWeJWAqrDi9TV0mBpFGOFrXW1CkBWwe9Q2kZt15HHtWlb7ZQWAxSkjqjIrIu3ORge1QzMfM/djP1q/PGYmBHI71QumDNwCPeoBsSR1YFlOCOoNYzMZLvG7nsKv3KGGPMxznptrOsY99+vPynpXVTRx1GdRokjKo3/KK17h/MUqo4qjp9vt4PNWrnI5X5R705CgzIurXzD93pXP6p4bE8nmIuH7YrrrhBtH0qOKNVkVyc4rmlG51RnY8turWW1uijDGKs2d1tbrg11euaUk0zyhc9+BXF3kLW7eYn3Selc0o2PSp1EzoLO8JbBNbVncbq5fS51bBbjjvW5azL25rFPU6HaR1FpJ0I5roLGQMvPWuTs5tq9a37KbaoY810qWhk4m7DKBwDz6Vobgwz1rAhmCyb61omwo5pc5PKaNu21TmrCyD0qnFMAoBqUTDHSjmHYgvJtjVRluTt4P0FLqE3zc8fWsW+mMalg2CnOKycubQT91XJb7UBGBvO0/yrwX47/GKHSbWXSbKfN3IMMwPNaPxn+LMXhPT38tg08g2qoPPNfH2sa1ca9qUt7dOXmZsjPpWkYXPOqVrMLq5M0jM7Fnc7nJ/iNM0Zf+JxZEf8/CY/76FQmQSFnIwat+HSJNTs+x+0J/6EK1R58nc+39lFWdo9aKsg4rXBnXL8/wDTZv51Q28Gr+t/8hy/H/TZv51QJ4NbrY5JbiVG1OLGmMxpkjWpKPrRxQAymtTqMD8aiwEMlRVNIOtRbTTUR30E2iolUpJtx2qXoy5qpqF2LZJJW+UIMg0m7F01c8l+NWrtcTwafG3y9XxXB6XGyqo61oeJNSOta9czn5k3Yos4tuBiuCpLmZ6tKNkbWmrnbXXabZhtpNcrp8Z8xc9K7axH7palIbNG1KiRU25rqdPj2Bc1zunKBICw5rp7H74z0rqiiOpeWLLUsh2rirKqB+VVLjiqL3K0Me+4wOK73w25hRVY5FcDG/770Ndj4ZuWO0NyK1gjOeh6Vp9glxCGXk1FcWr2sx2rxmpNKk2wqQcCtGS4Cx4YAhuhPWoktTSMro56+uiuFA+tUUutx2EVpahZl9xHXqKxWsZSwIO16ksnuFE0eKgsdPzMHU8qelSyE28Xz9an0lldwwPNdkNjjqbnR6aoKjjDVLexb+BRakdcc4qTBZjWUioGc0JaIt6cVTVWWTPUZrUmU7WHasmOV45mJ+4DWD3Ohj5NpzkZB4NYWsaArY8sYD84rR8wG4IB4zV5mG5WbnHTFKSuaRdjh7jSXtplRVqeNnt3VWXFdhdWK3OHA561SvtO+0Q8phh0xXLKHU7KVTUqWd50ArorK7CoOM1xyRyWEnPQ+tbFjfc9awlKx6d7o7G1mDgfLWlHJ8tYmm3CstaUcnbNTGZDiacbZXOcVHNdFT1zUKyfLwaq3EwhYMeeau9zKUUtSO+vEVSZc47V5N8WviZaeC9Le5ebMmMRoD941e+KnxIi8K6bPudWmYHaua+M/G3jK98aXZmvGJRW+SM9BWsY2dzgrVEkUvF3iq+8Xao99dOxEhysRPC1iqzL/DTxuOWJyaRs10xPHlK7FVs5Jq94Zb/icWX/AF8J/wChCqA7/SrfhvjWLL/r4T/0IUyT7v3UU7YKKoDiNZ/5Dd8f+mzfzqhkVd1pv+Jxff8AXVv51mhutdKWhyyWo5qjJpzNTKCRDntSc06igQymk0rU2kAHG05pm0U+o2jMh64FO4mMbGSc9K4L4reIP7N0toUbbLJgAe2ea7a/mjtIWZ2wqDJNfP3jfV5PEuuSOr5hiOAK5qjsdlGJj6fC3JJzuOSa3rWHoccVU06zKxjIrbtLf5cVw9bnpLQs2cY3Ljmut00fKAawbO02sprobNdmK1iQzZsly2TW/Z5C5rEsGVsVvwAbBiuiLM2aPmAxDB5qBwZKar9qtW8e8UM0joVo7ccseK6bw6PLIIGeayJLfala2gttYAHvXRT2Mqp6Ppe4xqQPwrQmlE0YBG3bWbpLNsHPakvpiqnefl7YqZ3JpPUq31028gNjFTWu24hVmHIrKdizEg5WtLTj8u2s46vU6noixdWK3iAbccVnW2mS2twNoO01ubxGtLZzLJNt4xXbDY8+pJ3LNvlVAxT5C8cnT5avG3iUAjk1UvN6kccVlNGlNkbYaM56Vm3tuFVtoyDWk/zR1VP74Fa52jpvcwpLUmRSpqwwMZBB3VofY/m6U2SzpXK3Ehl3AHv6VqKqTRhdmKzIY9rha0ozsxUSasb042dzL1LSBMT8uKwbqFrBgSMLnrXcf6w8is7WNNW4hIC815k4q56sJGfpd8Cowc10VvMNuSa4y3ibT7gL1roba53Rqc1j1OnS1zRe82ttB471zXjTxpb+F9LmuriRQqoTz3p+pamtp5k0jhIoxkkmvk341fFKXxRqz2Ns+21jO3Kng12U4nlYity3RzHxA8c3HjDWLid5GWJW+Rc8EVx0jeY24jFT7PL4Jzu71HIvvkV2JaHhym5MhOOlMYVKFpki1RnbW5F6/SrXhth/bFmP+nhP/QhVf/CpPD3/ACGrP/r4j/8AQhTsM+99w9aKiopgcTrmP7ZvMf8APVv51mtgHirutN/xOLz/AK6t/Os5m5rqWxzS3H59qbupuaTmqEKzHtTdxpC1Juo0KsLn3optAbtUC0H4zwaY6nyzg80NIFYDuag1G6W1tmk3cYpBa70OF+KWvDTdN8hJNssoxxXk2n2obn+I8sfWtnxhqH9v6tISxKIcKPpUOm2Z2njmvPrPU9OjCy1JoIWXAB4rUthtIGKW1svmXIrRWz2sOKy3Ni1Zp0rYhXkVRs4SD7VpRxljxW8FoQzStU8mHfWxYXBkUZNYkdwFwjZ21q2Iwwx92t0SlqbQjBxgVqWFqSORVOzXzNoHrXSWFv8AL0qJG0UUpLUsDxxRYqYZABxzW39nDKeO1ZckZin9s100TmqnaaXIRbqc81JdYZTg4NVdLkH2ZfpS3Ui88nNbTjoZ0mrkMcQeXGea17GExMDjNULGzMzCQEYro4YwsYO2uHZnXJqxFOqeWwK9utZ1j8sx9M9auXD7lZQeDVKHEXy5zXXBnFOJ09vL+7G3rVxoxNbjcvNZdi2yMMx4NXFuAv8AFx6GmxRdiOWzLDCCqsMAjY7hjHWte2zMcjinXGlqzZB5NZSRspGNJJGZsKOKYy+Xu3c56Vak0/7OSQMnNIyiUZPVa5Z3R007MoSL5RDgZqxbnz03YxiiON5C2ACM1YiQr8m2uZtnarIuWsSMoJ9KS6tf3bEc0+KEx4qSQlkIrCRvGRx2p2JyXUfN6021m8u12sMMD19K3buHMbZGAK82+I3jCHwfoN1cl8SHIRe5qYQbY51LLc8p+P3xUS0ZtJ0+UmVhiRlPT2r52IE0hL9W5P1qzr2pPrmsXV/IxLSNkVShzt+fk+or0Yx0PBrS5mWMlcc5xSde2KQMO1Lu9aowSsNPfFQvmpqYwpgRf3fc81JoYxrNpj/n5j/9CFMf5SvtzUmg86xaHBx9ojP/AI8KoD7r3N60U3zk9DRQK6OK1r/kMXn/AF1b+dZzfeq5rLf8Ti8/66t/OqLNzXUtjne46mM1GRTaYr2EzmlppWjaaA5h1HvTKUZ9eKTAb96QfWuF+KXiAaTpMkUDfvJvlFdld3a2oJbg4614X401N9X1pkBLIrevFc8pW0NqUbszdFtjKFeQ5Y9frXT2sPlrwOKoaPYlVU44rprW23LjFcctT1NkJZ25kXdjpV9bfMe49asWluPLIHFWIrXjmlGJDZDbR/KCPWtJYx5Yx1psMIViAO1TyIRHjvXVHYgqbv3i1t2RJ21i7TvFa1kzKR6U3oarU6jS8+Yvpmu50qNWXpXJ6HAJlQnrmu002E9OmKj4ivhLTW4UdKxtQt1V+lb1x80eB2rHvvmYe1ddE56hNptwfLA9KuNmRSduaw7O4+z3BGchq6Owh3ovOeK6JanHTfvF3RY2xyuBW+zf6PgCoNPtwIxip5ztXGRXC46ne1dGVJGNxqGK33SNipbvaGzk1FZk+ccn5DW6MpF+0c8qe1WNyyEEjBqqxxGccDsadp6tJc4c5WrZglc37OTAHatVWEi+9Ztso+6o4960UTy8HtWLNVEk+xrNGeOaoXGlhVGOprSjbnOcCrK+WxXPJrnnqbQdjlpoDZyBTwDSxhd4Oa6O8so7puFrMm08xtjHH0rm2OyMri2SiZiOtMuogGwDirEMP2eMkdagugZIWZuAvNZ2voaOVkY2qyJaWEkkzYA5r4j+PHjyTxT4m+yW8gFlBxjPBNe/ftHfEc+G/Dq6davi7ueB6gV8c3Wbhy7Esx5JJ5raELHFUq30KjLtyO464pFp5WjbXScTFXtSt1pF7U6kxDaa3WpKRPvUgGiPf27VZ8Ow/wDE2tR0/fp/6EKap25KjLVveDdBl1LUI2iRtqsH8z+6Qc1FwhFzep9e/Zm9aK82/tjW/wDoKf8Ajg/wooudXsUaWtD/AIm15/11b+dUGPzVd1w41m9H/TVv51nM3zV6NjypbklFR7qN1OxJJS59qi3UbqLAK3y0nDdeDSOTURkEfJqJaFdTlPiNrX9maRKQcSMpCjNeT6RGbt2kkOWY5zW78WNY+3aqlqjfKp5wapaDahYlNcc9z0KUbI6KxtgsYA61tWVue65qlpcGWGeBXTWVuoxxWfLdnVcjtrcL1FXEtxjhanW3Hpip4oe1aKKRNigse2TpippIt2CKnmgxzSR46VYuUp+ThhkVciGNuOKURh2FXorPoKyfY2ijqfC4Dxrng13tnGPJyDg1w/h2Hy9v1r0CxVPJ/CnEUytMwA9c1i3fzM4PIrXvABuI7CufvbgxgleTXTTbTOdq4lrbrI3q2a7PR7fMC/LkjrXKaKy3D8jBruNHtzDEe+7pXU3ocS0kbVnbgLzxxVbUIhHk5zV+FWEYH41Q1Rtq1yS0Z6CehiSk4ZWGfQ0ywVmkIZsj0qadwyAge1RRMscmT+Faw13Oeo2i3Jny2XtWho8DSKCo59ayZSZZFCnI710Onho4xs4FEmZxua1su7grj3q95fQZzUdrGWjBPBq0q/LxXPdvc3jciZGC4FEW5eD1qdYyKYQN5qbG1kSxyH8aftWZcYwaSLGT9KWP5GJrKUdRxbTsI1riI/LmsTV7xdO0+4mlwiRoW59hmumaQ+T07V45+0R4mHh34e3sgYK8nyDnmoUdS5z0Pjj4veNp/GHjG4mdsxQuUjXPTtXDt0p1zIGk8wnc8nzH8aa1a6nDKxE1NPIxTmpKskaFxTqKKBCUi8N707PX6UW8LTskYBLseMVmxRu2aWh6TNql6kUancT83GcCvcfDWj2miaeIouJMcsOMk9qwPAvhsaLZedMAZ2GcmqfijxiY9TtrWyx/rkEhB9xWauzvUVTVz0v/AIR/Uv8AnhRXY/ap/wDIorTlI9qjjNcbOtXv/XVv51ns3NXNdP8AxO772lb+dZ+7NeqtjyJbj93vRu96Zmk3U7CJQ1G6og2OtAkBpaCuSCT5zn+KsXxRqa6ZYySlsFV4rUZvn9AvSvL/AIqa4WhW2Vhvb0rGtJI1pq7ODaWTWNRkuW5LNXZaLArRopHSuY0OHCrkfWu30i2GAQK8yWrPXSsjetYV3KAK6CzQDaAOaytMRW69a6LT4d0gOK1iR1FaPpxViGFcZIrQazG0HFQSRsnAWrLKUyKxwKjW3281ZkhO4nFQzMY0y3FPoUhsKLu4rZ0+HcwOOO9Zlmm4gqMmun0u3BZePrWfU2Rs6PZiQqEGK6qECGEonD9zWbpdvtxgYrYm2rAR0PrWkTGfYx7xm5BNczqkvlyZ7Vu3rNvK9q53UIy7HGTW10iUaPh25/0hcn5TXqekIpiRj0IrxbSbgxXybgRzXsnh9xJboe2OBWu6PPqRadzeUERnH3ax9VT5CRWyufL56Vl30ZbIFYTOqEtNTn9u1D/d71Tkm2sMdO1a1xAF5GenSufmc/ajVwdjKoaelM8lx04zXVW2fMzWNotuCA3FbsIKt8oyKJOwoG1ayeYgU1dSBlH+z3rPtOwHBrXhU7Mk8VgjoSI8BV6VEVXrV0orD3qvNCVHSkaDVAXlRzTxHzk0Qr2Ip7KzL0qWLzI3kZYW9zivkP8AbA8XLLdQaLG2Ru3MP8/SvrTUJBbWcsjN91SzfSvzn+NXic+JPiFqE2cxxtsUj6mhR6nPUbOGZRuJ9FwKGqNpNzr/ALNPZqswT7kZFG2looLEZaYODUjNTe+aQhp6113w60UalfGcjEcZzXJMdoJ9sV3fgTxBZ6Xpsqy/K46YqGmXTtF6nUeMfEaaNpsm0/vHGFFeYaJcPeapbs/JedD/AOPCn+INafXNQkY/6sE7QPSqvhnK6xahuhuE/wDQhSii6k+bRH2z9jWirvlr6mit7HPZnk+vZ/tzUPaVv51nfWtLxAca7qQ/6bN/OswtwK71scr3F3UmaKKpEsMFqTbtPNPziopm4rOQiHUr5LSFnJAwuTXgHiDUJNa16V/vIjbV9DXdfEzxR9nEdlC+JCMNXBaXZNJIrHqTmuCrK56VCnpc6nw/YqygHhj2rs9PsxGu0CsLQYPLmGRXXWijGQKwSOwuaZa/NzxXT6fb7eg5rG03LMABzXUWMYOBjmtUjMsMvyDiq0i8jpWmYfkqpLDTLKEq/jVO6h85cEYNackOAKpzDa9JsuJHpMTLOFK8V2lhZnepA4rntLty0gIFdvpNqXxkdKzvqaXtqa+m25UA06/kVQcnBq9HD5MPHpWDqpY5Oa2Rz3uzPvpN2ccmq8NqJcnvRtMhyTWxp9nuUfLmnJmsYnOyaWYZlfHevQ/CNwZI1TOdoxWHf6eVUHbVrwzM1vdbegrpp6o4a+h6JG3y4IqrdQb+lTwsWQY606Zyq84qZIzizndQTy4Wx1rDitVklJYZbNdLeKRkYzmqtrphaXeaLWHPUlsIBEoGCtbdqpHWqccO3jGa0rNfl561lJ3NIKyL1unTvWgkbKoOeKoQMVbGKvoTtB7elZm6JNwUZzUbTb+Key+YnpVdV2UFFlV+XPepGysJwKiicE4p00m2I4qXuS3ocF8XPES6D4F1a6B2SCPaM/Svzc1Cd7jUJZZGy0jF/wA6+x/2t/FDWfh2PTI5Nr3B+YZ7V8bSRjf6kcVfQ5ZMR4wDmhqVmzxTaRmFFFFBQjUlFFABTQ21mwcCnVH/ABUASIQq5HXFW/Dvza1Zc/8ALdP/AEIVSXqfpVrw3/yG7L/r4T/0IUWsB907aKWiq5gPJfETZ1/U/wDrs386zv7tX/EDBde1IHr5zfzqhuDYr0FscTeotJ0paSQdMUEti8t8oOCehrP1S9WxtJJH/hHLVdkbZHkda88+JevNZ2QtVbmTris6krI0pxueba3ePrOryzEkljhT6V0Oj6f/AKtWPK1z+nwZJZvXK13Oi2okXf0NeXe+560dNje0q3C8Acmujs4yuFxWdpFm+ckDH1rora13EYxmtFoWX9Nt/Lbdit2x++GPNUbC3LYBret7ELgjpT5hEi5bA7VHNDhiMcVorEuwECoJl3HgUXGZckY3AY4rOuIgZ+nFal0rL0qBYwV3NSGjR0iNY1Dd67DSJBtyRk5rmdMhR1AGc12Gm2ojhyBQlqD2NGaXdFjFYGpKAGyOK1LufEeBWTfNuUKTyaoImHGH8zg8ZrrtDVtqluRWFDb/ADACus0eH9yOKiTNnsT3kSyQn5eaydPjMd7nGOa3JkKxmsyHAuM+9ddFnn1tjsbNjJGozjipZo02/M2ar2B3Rg+1SXDLjGK0ZhEoyQlm+U5FOELxgYGDVpMemKsRxbuvNTJlJDLcHYPWrcMO3nFRxxmNuelXrcDoetczOmA6H72Mc1c5XAojhUMCOtWxb7lzSNSuz/J71VZyDV2SHH0qvNFnGBUlCRsOp4GKdcTIsbE9AuadHGFjIYY4rmvH2tL4f8L31y3ylYyQwpdTOex8XftNeJP7e8fNbI5eGAYxnjIxXjkjBmfaMKDgVt+JtWbWtcv71iWkkkYgn0yaxjjn0zmtOhxkDLzTalbios+1IBDSZNOooAbRRRigAowvpQQcU3mgBeA34Vb8N4/tyxx/z8J/6EKonO78KveGR/xPLL/run/oQpgfdXFFJtopAeQeI/8AkYNS/wCu7/zrPTrWl4h+bxJqg/6bv/Os2M8mvSWx50tySo5s8YqTPtUbEsTngUxFbUrxLexeRuNozXhHiLVm1nWmZmzGpxXdfEjxObW0NrCfnkJU4Neb6XYyTSAtyTya4a8rHpUYWVzY0WxMkqsfuV3un2gVV2jiue0ezKxjjFdrpNsWUcVxo7LGxpcYVea37G1Mh3DpWTYw4zxXTaXEdgrQov6db87e9bUcexCD1qrpsYDHjmtARnDGlYBYBuBFJJDzQuVUY45q00LFM4zSEYt3CSwCjOag+y/wnitG4V1cYGTmn/ZyygsOadykWtJt9uK6qEGOED1rF0qDdgitncVwpq0DGzKGjPrWPdqevpW5IvyE+1Z3l+ZuBGeaLjihunwh8Z611Om2u2Pis/SbEMFyK6aOAQxcelZS1LkzJu1IQisyBf3/ADWxeDIbNZMZKTZxnmu2irHn1ndHWacMQj6UT9aTTW3QjtS3URD9a1ZgpWJLXElW9vIxVK3jKt1rQiXdWMjojqLuAqzbDdg1C0fTirltHWGx0xRaj9atK/y4quvy8YpzMRRcqw9vmpuOgxUfmH1o8zpzWfMF7CXUgXgjIr52/ao8aNonh2LS0ky1weQOuK+gb64WNQzH5QcsfavgX4/eMpvFvjy8Vm/0WzfYmDx/nmrS5tTCo9DzSfauSO9VT3qeaQN2qA1p0OXbUheo9tSPTakadxtJStSUDE20tFIx5oAVulMalpjHrQAd/wAKveGf+Q1Zf9d0/wDQhVD/AAq74X/5DVl/13T/ANCFAH3ZRRRQB4/rn/Iyarn/AJ7v/Os7o2exrQ1xt3iLVj/03f8AnWc3NektjzpbjyuOc1ma3qcenWsksjhAq+vWtCeTy7ctXkXxT14P5dnHIdzdcGoqS5Ua048zOQ1bUJNd1aSbJ8sN8oNdDodj8oJ5NYOnWpTauMcV2OmwmGMGvKnLmZ68Y2Rs21sVC7RxXW6VDsjXisHTAWQZGa6yxhIjWhFmrY2/ykkda6Cxh2xjArNsISUAres1C4FaAXNPjKtk1ooy4Ix1qGPAHpUsce5SaQEgjG0CrjfLCPYVn+YVkAq9I37ke4qS+UpeWWYmpre3MjYJqaOEbAas2cQ8ygRctYBbr8ozUpbc2TxUqARKc1XdtxJFaIGTNKNhHtVWzXdIR71GzEMM1e0mHzXJ96hjR0OnWf7tG6VqmPapyM1HYxkKoHSpJ5CsgB6VPYJGTqCkKcDFYq5WQZNb+oESLxWMts0kpxxXdT2OGepv6ZL8gz0xViRizZPSsm3LwsFNaYbfGMdaGzLlLkC7sGr0cfAINVLHhcGtOOPCg+tYNm8RyxZHNWLdKSNasRrtrFs6kPCikZRipFGRS7cVNxlYrtqGRufTirMzALWbeSEKzUiJHJfE/wASx+HvCV/ds20rGcc+1fnpq14NQ1i8nOT5jF+TX0v+1D48KLFokRyZV3H6D/8AXXy/cYZnwMEYFdENjlqMibnr170xsbeKe3GaY1UznT0IHXmmVI/3qjqSoiEZptPpjdDQWJuHrSGm7TS9KAFprLTqRqAGf4Vd8L/8huy/67p/6EKpd/wq94V/5Dll/wBd0/8AQhQB910UUUAeO63/AMjBqX/Xd/5ms9RndV7XpAPEWp/9d3/nWdI4VeCQWr009Dz3G7M3xVqyadpbyHhgK+fbi7mvtWkuJTlS5K/TNdr8UvEhW4Fgj5duCK46xtTJ5YzuxxXnVZcx6dCNkbmm24lkQ4612em2ok2xEcVjabYhWQkY4rsNPgC7SBzXJDc6zSsbHYoFdXY2ObXNYlnGTtrr9PjDQqOlaFE+mW+1DnrW1Y2pZ8gVRtY/mIHFbemE78EYFAWuWDCRirNvEcU+RN3IFTQ5XqKA5SlNF++qcqTtHpU7Q7m3Z5p8MYLZNJF8pBtKkCtfT7dVUNVTyxu5q3HkLwavqJjriYA4qNTmo5YzIw5qVYWVM1p0MupDJGSRWxosA3DIrMB+dQR3ro9LjGAcYrNmiNuNFW1461QmkO4irPnBe/4VWmIdsiiJMytJ83WmJGucjrUk6ntUlvHtQkjNdS2OKREv72YDFaUMIXFRrCFxgc9asxrnmokxqJdgXZgCr0MQXn1qhBnI71pxdBXOzoRZVelTotRJzViPBrM1HYxTWqTFQyHtQBXb5cmud8S6oml6bc3kjbVhUmt64kKwscc14n+0R4tj0PwXNbBwJ7rhRnn/ADxVRRhN2Plb4oeLn8XeKrm5JyisVU/jXEsvzZq2ys4JPbqe9QyLXSkcMndkDd6iqVu9RUNaDWxG1RVMy1GV4qCiOmVIRim7aChuRTTQRiigApjd6caaeaAG9z9K0PC//Iasv+u6f+hCs/8Aix7Vf8M/LrliP+m6f+hCgD7uooooA8Y19QviDVCf+e7/AM65HxHry6TaSSnAKjIrrfEf/If1L/ru/wDM15d8Tv8AkFzfSu2WkTkivePINRvm13WZL2Q5y2BXRaPZspUjknmuV0z/AFa/71d1ov3x9K8vmuz2IR906fTY9zL3rrbGEccVy+k/6yuvseopLQqxt2cA8sYHNb+n5CgVkWP3K2bH74qxmvYKWk5FbdugVhjrWZYfeP1rVt/9YPrTLRpBgrANxxUjA8ACoZ/9Yv4VaP3k+lFi0hY13LxziiEDccc81JY/ek+hpI/vN9aaRTVhSu5sCpPmVeAaav3mqX/llTsZSKys2+rnnHaAaqD/AFg+lS/xCqb0MupahtvMYNiui0+PbD71jWf8Nbtt/qazKvYimk7Z5oiU9SKjk/11WI+lVEzlIk8sPipmh2x8DmmQ/eq36VpzHP1IRgYyccVahUNyOaqSfeNXLT7lZuRpFFy1QYq2qnPAqpb/AHavw/dNZ3NESISBzViFqr1PDUmpLuqCXc3QVLJ96o3+61AjN1CTyrVn+8pBwRXxT+0N4rfX/FAtVbfDaHHByM4/+vX2dqv/ACDf+AN/KvgDx/8A8jVqf/XZq6KaucdZ2OUkO7LLwG6j0qpL3q033T9aqyVtc4UyBu9RVM3Wo/4jQ9jVEbVG3Snyd6Y3SsGWRtTTT26UxqZQxqSnUUAMbpTalbpTGoAj/jq/4a/5Dlj/ANfCf+hCqLfeH0q/4Z/5Dlh/18J/6EKAPu3aaKdRQB//2Q==" alt="Cool" style="width:100%;height:100%;object-fit:cover;" />
+                                    <div class="image-overlay"></div>
+                                </div>
+                                <div class="card-label">
+                                    <h4 class="undertone-name cool-color">Cool</h4>
+                                    <div class="undertone-line cool-bg"></div>
+                                </div>
+                                <div class="card-border cool-border"></div>
+                                <div class="selection-check">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="card-shadow cool-shadow"></div>
+                        </div>
+
+                        <!-- Warm Undertone -->
+                        <div class="undertone-card" data-undertone="warm">
+                            <div class="card-inner">
+                                <div class="image-container">
+                                    <img src="data:image/jpeg;base64,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" alt="Warm" style="width:100%;height:100%;object-fit:cover;" />
+                                    <div class="image-overlay"></div>
+                                </div>
+                                <div class="card-label">
+                                    <h4 class="undertone-name warm-color">Warm</h4>
+                                    <div class="undertone-line warm-bg"></div>
+                                </div>
+                                <div class="card-border warm-border"></div>
+                                <div class="selection-check">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="card-shadow warm-shadow"></div>
+                        </div>
+
+                        <!-- Neutral Undertone -->
+                        <div class="undertone-card" data-undertone="neutral">
+                            <div class="card-inner">
+                                <div class="image-container">
+                                    <img src="data:image/jpeg;base64,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" alt="Neutral" style="width:100%;height:100%;object-fit:cover;" />
+                                    <div class="image-overlay"></div>
+                                </div>
+                                <div class="card-label">
+                                    <h4 class="undertone-name neutral-color">Neutral</h4>
+                                    <div class="undertone-line neutral-bg"></div>
+                                </div>
+                                <div class="card-border neutral-border"></div>
+                                <div class="selection-check">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="card-shadow neutral-shadow"></div>
+                        </div>
+                    </div>
+
+                    <!-- Details Section -->
+                    <div class="details-section" id="detailsSection">
+                        <div class="details-container">
+                            <div class="details-header">
+                                <h3 class="details-title" id="detailsTitle"></h3>
+                                <p class="details-description" id="detailsDescription"></p>
+                            </div>
+
+                            <!-- Details Grid -->
+                            <div class="details-grid">
+                                <div class="detail-card colors-card">
+                                    <h4>🎨 <span id="colorsTitle"></span></h4>
+                                    <ul id="colorsList"></ul>
+                                </div>
+
+                                <div class="detail-card lipstick-card">
+                                    <h4>🎨 <span id="lipstickTitle"></span></h4>
+                                    <ul id="lipstickList"></ul>
+                                </div>
+
+                                <div class="detail-card hair-card">
+                                    <h4>💇 <span id="hairTitle"></span></h4>
+                                    <ul id="hairList"></ul>
+                                </div>
+
+                                <div class="detail-card hijab-card">
+                                    <h4>👔 <span id="hijabTitle"></span></h4>
+                                    <ul id="hijabList"></ul>
+                                </div>
+                            </div>
+
+                            <!-- Jewelry Section - Full Width -->
+                            <div class="detail-card jewelry-card">
+                                <h4>🪙 <span id="jewelryTitle"></span></h4>
+                                <div class="jewelry-grid" id="jewelryList"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Diet Page -->
+        <div class="content-page" id="diet">
+            <div class="container">
+                <h2>Diet & Skin Foods</h2>
+                <p class="subtitle">Tap any food to unlock its skin secret</p>
+
+                <div class="diet-tabs">
+                    <button class="diet-tab active" data-category="fruits">Best Fruits</button>
+                    <button class="diet-tab" data-category="veggies">Skin Veggies</button>
+                    <button class="diet-tab" data-category="clearfoods">Foods for Clear Skin</button>
+                    <button class="diet-tab" data-category="oats">Overnight Oats</button>
+                </div>
+
+                <div class="drinks-grid" id="drinksGrid"></div>
+
+                <!-- Pop-up Modal -->
+                <div class="recipe-modal" id="recipeModal">
+                    <div class="recipe-modal-inner">
+                        <button class="modal-close" id="modalClose">✕</button>
+                        <div class="modal-emoji" id="modalEmoji"></div>
+                        <h3 class="modal-title" id="modalTitle"></h3>
+                        <p class="modal-benefit" id="modalBenefit"></p>
+                        <div class="modal-divider"></div>
+                        <h4 class="modal-ingredients-title" id="modalIngredientsLabel"></h4>
+                        <ul class="modal-ingredients" id="modalIngredients"></ul>
+                        <div class="modal-tip" id="modalTip"></div>
+                    </div>
+                </div>
+                <div class="modal-overlay" id="modalOverlay"></div>
+            </div>
+        </div>
+
+        <!-- Skin Care Page -->
+        <div class="content-page" id="skin-care">
+            <div class="container">
+                <h2>Skin Care</h2>
+                <div class="content-box">
+                    <p>Content for Skin Care coming soon...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exercise Page -->
+        <div class="content-page" id="exercise">
+            <div class="ex-container">
+                <!-- Hero -->
+                <div class="ex-hero">
+                    <p class="ex-hero-eyebrow">Tap to Reveal</p>
+                    <h2 class="ex-hero-title">FACE & NECK<span> WORKOUTS</span></h2>
+                    <p class="ex-hero-sub">Click any exercise card to start the step-by-step guide</p>
+                    <!-- Progress Bar -->
+                    <div class="ex-progress-wrap">
+                        <div class="ex-progress-label"><span id="exDoneCount">0</span> / <span id="exTotalCount">0</span> exercises explored</div>
+                        <div class="ex-progress-track"><div class="ex-progress-bar" id="exProgressBar"></div></div>
+                    </div>
+                </div>
+
+                <!-- Category Tabs -->
+                <div class="ex-tabs-wrap">
+                    <button class="ex-tab active" data-excat="neck">Neck Lift</button>
+                    <button class="ex-tab" data-excat="face">Facial Fat</button>
+                </div>
+
+                <!-- Cards Grid -->
+                <div class="ex-grid" id="exGrid"></div>
+            </div>
+
+            <!-- Exercise Modal -->
+            <div class="ex-modal-overlay" id="exModalOverlay"></div>
+            <div class="ex-modal" id="exModal">
+                <button class="ex-modal-close" id="exModalClose">✕</button>
+                <div class="ex-modal-header">
+                    <div class="ex-modal-icon" id="exModalIcon"></div>
+                    <h3 class="ex-modal-title" id="exModalTitle"></h3>
+                    <p class="ex-modal-reps" id="exModalReps"></p>
+                </div>
+
+                <!-- Step Stepper -->
+                <div class="ex-stepper" id="exStepper"></div>
+
+                <!-- Nav Buttons -->
+                <div class="ex-modal-nav">
+                    <button class="ex-nav-btn" id="exPrevBtn">← Prev</button>
+                    <span class="ex-step-counter" id="exStepCounter"></span>
+                    <button class="ex-nav-btn ex-nav-next" id="exNextBtn">Next →</button>
+                </div>
+
+                <!-- Done badge -->
+                <div class="ex-done-badge" id="exDoneBadge">🎉 Exercise Complete!</div>
+            </div>
+        </div>
+
+        <!-- Hydra Glow Page -->
+        <div class="content-page" id="hydra-glow">
+            <div class="hg-container">
+                <!-- Hero Banner -->
+                <div class="hg-hero">
+                    <div class="hg-hero-bubbles">
+                        <span class="hg-bubble b1"></span>
+                        <span class="hg-bubble b2"></span>
+                        <span class="hg-bubble b3"></span>
+                        <span class="hg-bubble b4"></span>
+                        <span class="hg-bubble b5"></span>
+                    </div>
+                    <div class="hg-hero-text">
+                        <p class="hg-hero-eyebrow">Unlock Your Glow</p>
+                        <h2 class="hg-hero-title">HYDRA<span>GLOW</span></h2>
+                        <p class="hg-hero-sub">Tap a drink to reveal the recipe and skin secret</p>
+                    </div>
+                    <!-- Water tracker -->
+                    <div class="hg-tracker">
+                        <p class="hg-tracker-label">Today's Hydration</p>
+                        <div class="hg-glasses-row" id="hgGlassesRow"></div>
+                        <p class="hg-tracker-count"><span id="hgGlassCount">0</span> / 8 glasses</p>
+                    </div>
+                </div>
+
+                <!-- Category Tabs -->
+                <div class="hg-tabs-wrap">
+                    <button class="hg-tab active" data-hgcat="glow7">7 Glow Drinks</button>
+                    <button class="hg-tab" data-hgcat="morning">Morning Drinks</button>
+                    <button class="hg-tab" data-hgcat="goal">Drink by Goal</button>
+                    <button class="hg-tab" data-hgcat="juices">Skin Juices</button>
+                    <button class="hg-tab" data-hgcat="smoothies">Smoothies</button>
+                    <button class="hg-tab" data-hgcat="beetroot">Beetroot Series</button>
+                    <button class="hg-tab" data-hgcat="recipes">Glow Recipes</button>
+                </div>
+
+                <!-- Cards Grid -->
+                <div class="hg-grid" id="hgGrid"></div>
+            </div>
+
+            <!-- Drink Modal -->
+            <div class="hg-modal-overlay" id="hgModalOverlay"></div>
+            <div class="hg-modal" id="hgModal">
+                <button class="hg-modal-close" id="hgModalClose">✕</button>
+                <div class="hg-modal-glow-ring" id="hgModalRing"></div>
+                <div class="hg-modal-emoji" id="hgModalEmoji"></div>
+                <h3 class="hg-modal-title" id="hgModalTitle"></h3>
+                <p class="hg-modal-tagline" id="hgModalTagline"></p>
+                <div class="hg-modal-divider"></div>
+                <p class="hg-modal-section-label">🧪 Recipe / Ingredients</p>
+                <ul class="hg-modal-ingredients" id="hgModalIngredients"></ul>
+                <div class="hg-modal-tip" id="hgModalTip"></div>
+                <div class="hg-modal-skip" id="hgModalSkip"></div>
+            </div>
+        </div>
+
+        <!-- NeuroCure Page -->
+        <div class="content-page" id="neurocure">
+            <div class="container" style="max-width:780px">
+
+                <!-- Hero -->
+                <div class="nc-hero">
+                    <div class="nc-hero-badge">🧠 NeuroCure</div>
+                    <h1 class="nc-hero-title">Your Brain on<br><span>Nicotine.</span></h1>
+                    <p class="nc-hero-sub">The truth about what smoke &amp; vape do to your brain — and exactly how to take it back. Select your habit below.</p>
+                    <div class="nc-hero-pills">
+                        <span class="nc-hero-pill">🔬 Science-backed</span>
+                        <span class="nc-hero-pill">🎯 Personalised</span>
+                        <span class="nc-hero-pill">💪 Quit Plan</span>
+                    </div>
+                    <div class="nc-hero-brain">🧠</div>
+                </div>
+
+                <!-- Mode Selector -->
+                <div class="nc-mode-wrap">
+                    <p class="nc-mode-label">My habit is —</p>
+                    <div class="nc-mode-cards">
+                        <div class="nc-mode-card" id="ncModeSmoke" onclick="ncSetMode('smoke')">
+                            <div class="nc-mode-icon">🚬</div>
+                            <div class="nc-mode-name">I Smoke</div>
+                            <div class="nc-mode-hint">Cigarettes · tobacco</div>
+                        </div>
+                        <div class="nc-mode-card" id="ncModeVape" onclick="ncSetMode('vape')">
+                            <div class="nc-mode-icon">💨</div>
+                            <div class="nc-mode-name">I Vape</div>
+                            <div class="nc-mode-hint">E-cig · vape pen</div>
+                        </div>
+                        <div class="nc-mode-card" id="ncModeClean" onclick="ncSetMode('clean')">
+                            <div class="nc-mode-icon">✅</div>
+                            <div class="nc-mode-name">Neither</div>
+                            <div class="nc-mode-hint">I don't use nicotine</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ═══ SMOKE/VAPE TRACKER GAME ═══ -->
+                <div class="nc-tracker-wrap" id="ncTrackerWrap" style="display:none">
+
+                    <!-- Header -->
+                    <div class="nct-header">
+                        <div class="nct-badge" id="nctBadge">🚬 Smoke Tracker</div>
+                        <p class="nct-tagline">Log every cigarette or hit honestly — your body is already keeping score.</p>
+                    </div>
+
+                    <!-- XP / Level Bar -->
+                    <div class="nct-level-bar">
+                        <div class="nct-level-meta">
+                            <span class="nct-level-label">Recovery Level</span>
+                            <span class="nct-level-name" id="nctLevelName">Beginner</span>
+                        </div>
+                        <div class="nct-xp-track">
+                            <div class="nct-xp-fill" id="nctXpFill" style="width:0%"></div>
+                        </div>
+                        <div class="nct-xp-label"><span id="nctXpVal">0</span> XP — next level at <span id="nctXpNext">100</span></div>
+                    </div>
+
+                    <!-- Stats Row -->
+                    <div class="nct-stats-row">
+                        <div class="nct-stat-box">
+                            <div class="nct-stat-val" id="nctToday">0</div>
+                            <div class="nct-stat-lbl">Today</div>
+                        </div>
+                        <div class="nct-stat-box nct-stat-streak">
+                            <div class="nct-stat-val" id="nctStreak">0</div>
+                            <div class="nct-stat-lbl">🔥 Clean Streak (days)</div>
+                        </div>
+                        <div class="nct-stat-box">
+                            <div class="nct-stat-val" id="nctTotal">0</div>
+                            <div class="nct-stat-lbl">Total Logged</div>
+                        </div>
+                    </div>
+
+                    <!-- Log Buttons -->
+                    <div class="nct-log-row">
+                        <button class="nct-log-btn" id="nctLogBtn" onclick="nctLog()">
+                            <span class="nct-log-icon" id="nctLogIcon">🚬</span>
+                            <span>Log One</span>
+                        </button>
+                        <button class="nct-clean-btn" onclick="nctMarkCleanDay()">
+                            <span>✅ Mark Today Clean</span>
+                        </button>
+                    </div>
+
+                    <!-- Damage Meter -->
+                    <div class="nct-damage-wrap">
+                        <div class="nct-damage-label">
+                            <span>Today's Body Damage Score</span>
+                            <span id="nctDmgPct">0%</span>
+                        </div>
+                        <div class="nct-dmg-track">
+                            <div class="nct-dmg-fill" id="nctDmgFill" style="width:0%"></div>
+                        </div>
+                        <p class="nct-dmg-hint" id="nctDmgHint">Log your first one to see your damage score.</p>
+                    </div>
+
+                    <!-- AI Heal Panel — shown after logging -->
+                    <div class="nct-heal-wrap" id="nctHealWrap" style="display:none">
+                        <div class="nct-heal-title">🩺 What You Can Do Right Now to Heal</div>
+                        <div class="nct-heal-grid" id="nctHealGrid"></div>
+                    </div>
+
+                    <!-- 7-Day Log Chart -->
+                    <div class="nct-chart-wrap">
+                        <div class="nct-chart-title">📊 Your 7-Day Log</div>
+                        <div class="nct-bar-chart" id="nctBarChart"></div>
+                    </div>
+
+                    <!-- Achievement Shelf -->
+                    <div class="nct-achieve-wrap">
+                        <div class="nct-chart-title">🏅 Achievements</div>
+                        <div class="nct-achieve-grid" id="nctAchieveGrid"></div>
+                    </div>
+
+                    <!-- Toast -->
+                    <div class="nct-toast" id="nctToast"></div>
+                </div>
+                <!-- ═══ END TRACKER ═══ -->
+
+                <!-- ═══ SMOKE PANEL ═══ -->
+                <div class="nc-panel" id="ncPanelSmoke">
+
+                    <!-- Brain Hook -->
+                    <div class="nc-brain-hook">
+                        <div class="nc-hook-title">Why does your first cigarette feel like relief?</div>
+                        <p class="nc-hook-text">It's not relaxation — it's a trick. When you smoke, nicotine hits your brain in <strong>7–10 seconds</strong>. It floods your nucleus accumbens (the brain's pleasure core) with <strong>dopamine</strong> — the same chemical that fires when you eat great food or fall in love. Your brain goes: <em>"That felt incredible. Do it again."</em></p>
+                        <div class="nc-truth-box">💡 The "calm" you feel? That's just your brain returning to normal after craving nicotine. You're not relaxing — you're ending withdrawal. The cigarette caused the anxiety in the first place.</div>
+                    </div>
+
+                    <!-- Dopamine Trap Cycle -->
+                    <div class="nc-cycle-section">
+                        <div class="nc-section-title">⚙️ The Addiction Trap — How It Loops</div>
+                        <div class="nc-cycle-track">
+                            <div class="nc-cycle-node">
+                                <span class="nc-cycle-emoji">🚬</span>
+                                <span class="nc-cycle-label">First Smoke</span>
+                                <span class="nc-cycle-sub">Nicotine floods brain</span>
+                            </div>
+                            <div class="nc-cycle-arrow">→</div>
+                            <div class="nc-cycle-node">
+                                <span class="nc-cycle-emoji">🎉</span>
+                                <span class="nc-cycle-label">Dopamine Spike</span>
+                                <span class="nc-cycle-sub">Pleasure + alertness</span>
+                            </div>
+                            <div class="nc-cycle-arrow">→</div>
+                            <div class="nc-cycle-node danger">
+                                <span class="nc-cycle-emoji">📉</span>
+                                <span class="nc-cycle-label">Fades Fast</span>
+                                <span class="nc-cycle-sub">Brain resets lower</span>
+                            </div>
+                            <div class="nc-cycle-arrow">→</div>
+                            <div class="nc-cycle-node danger">
+                                <span class="nc-cycle-emoji">😤</span>
+                                <span class="nc-cycle-label">Withdrawal Hits</span>
+                                <span class="nc-cycle-sub">Irritable, restless</span>
+                            </div>
+                            <div class="nc-cycle-arrow">→</div>
+                            <div class="nc-cycle-node">
+                                <span class="nc-cycle-emoji">🔄</span>
+                                <span class="nc-cycle-label">Crave Again</span>
+                                <span class="nc-cycle-sub">Trap repeats</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Damage Stats -->
+                    <div class="nc-section-title">☠️ What's Actually Happening Inside You</div>
+                    <div class="nc-stats-grid">
+                        <div class="nc-stat-card">
+                            <div class="nc-stat-icon">🫁</div>
+                            <div>
+                                <div class="nc-stat-label">Lung Capacity</div>
+                                <div class="nc-stat-val">–30% in 5 yrs</div>
+                                <div class="nc-stat-desc">Tar coats your alveoli — the tiny air sacs that keep you alive. Each cigarette deposits a tiny black layer that never fully goes away.</div>
+                            </div>
+                        </div>
+                        <div class="nc-stat-card">
+                            <div class="nc-stat-icon">❤️</div>
+                            <div>
+                                <div class="nc-stat-label">Heart Risk</div>
+                                <div class="nc-stat-val">2× more likely</div>
+                                <div class="nc-stat-desc">Smoking doubles your risk of heart attack. Nicotine spikes adrenaline, raising your heart rate every single time you smoke.</div>
+                            </div>
+                        </div>
+                        <div class="nc-stat-card">
+                            <div class="nc-stat-icon">🧴</div>
+                            <div>
+                                <div class="nc-stat-label">Skin Age</div>
+                                <div class="nc-stat-val">+10 yrs visually</div>
+                                <div class="nc-stat-desc">Carbon monoxide from smoke reduces oxygen to skin cells. Collagen degrades 40% faster — giving smokers deeper wrinkles, grey tone, and dry texture.</div>
+                            </div>
+                        </div>
+                        <div class="nc-stat-card">
+                            <div class="nc-stat-icon">🦷</div>
+                            <div>
+                                <div class="nc-stat-label">Oral Health</div>
+                                <div class="nc-stat-val">6× gum disease</div>
+                                <div class="nc-stat-desc">Nicotine reduces blood flow to gums. Yellow staining, persistent bad breath, and tooth loss are all directly linked to smoking.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Damage Timeline -->
+                    <div class="nc-timeline">
+                        <div class="nc-section-title">📅 Damage Timeline — Year by Year</div>
+                        <div class="nc-tl-item">
+                            <div class="nc-tl-dot">📅</div>
+                            <div class="nc-tl-content">
+                                <div class="nc-tl-time">0–3 Months</div>
+                                <div class="nc-tl-title">The Invisible Phase</div>
+                                <div class="nc-tl-desc">Nicotine reshapes brain receptor density. You feel you "need" cigarettes just to feel normal. Bad breath, slight cough starts. Skin loses its morning glow.</div>
+                            </div>
+                        </div>
+                        <div class="nc-tl-item">
+                            <div class="nc-tl-dot">🫁</div>
+                            <div class="nc-tl-content">
+                                <div class="nc-tl-time">1–2 Years</div>
+                                <div class="nc-tl-title">Lungs Begin to Scar</div>
+                                <div class="nc-tl-desc">Cilia (tiny hairs in your airways that sweep out debris) are paralysed by smoke. Mucus builds up. Chronic cough starts. Shortness of breath on stairs becomes noticeable.</div>
+                            </div>
+                        </div>
+                        <div class="nc-tl-item">
+                            <div class="nc-tl-dot">🩺</div>
+                            <div class="nc-tl-content">
+                                <div class="nc-tl-time">5–10 Years</div>
+                                <div class="nc-tl-title">Major Organ Damage</div>
+                                <div class="nc-tl-desc">Risk of COPD, chronic bronchitis, and atherosclerosis (hardened arteries) rises sharply. Male fertility drops significantly. Skin wrinkles visibly deepen.</div>
+                            </div>
+                        </div>
+                        <div class="nc-tl-item">
+                            <div class="nc-tl-dot">☠️</div>
+                            <div class="nc-tl-content">
+                                <div class="nc-tl-time">10–20 Years</div>
+                                <div class="nc-tl-title">Cancer Territory</div>
+                                <div class="nc-tl-desc">Lung cancer risk is 15–30× higher than a non-smoker. But here's the thing — <strong>quitting at any point still dramatically lowers this risk.</strong> It's never too late.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recovery Timeline -->
+                    <div class="nc-section-title">🌱 What Happens When You Stop — Hour by Hour</div>
+                    <div class="nc-recovery-track">
+                        <div class="nc-recovery-row">
+                            <div class="nc-rec-emoji">⚡</div>
+                            <div class="nc-rec-time">20 Minutes</div>
+                            <div class="nc-rec-bar-wrap">
+                                <div class="nc-rec-label">Heart rate drops to normal</div>
+                                <div class="nc-rec-bar-bg"><div class="nc-rec-bar-fill" style="width:12%"></div></div>
+                            </div>
+                        </div>
+                        <div class="nc-recovery-row">
+                            <div class="nc-rec-emoji">🩸</div>
+                            <div class="nc-rec-time">12 Hours</div>
+                            <div class="nc-rec-bar-wrap">
+                                <div class="nc-rec-label">Carbon monoxide clears from blood</div>
+                                <div class="nc-rec-bar-bg"><div class="nc-rec-bar-fill" style="width:22%"></div></div>
+                            </div>
+                        </div>
+                        <div class="nc-recovery-row">
+                            <div class="nc-rec-emoji">🫀</div>
+                            <div class="nc-rec-time">2–12 Weeks</div>
+                            <div class="nc-rec-bar-wrap">
+                                <div class="nc-rec-label">Circulation improves, lungs start healing</div>
+                                <div class="nc-rec-bar-bg"><div class="nc-rec-bar-fill" style="width:45%"></div></div>
+                            </div>
+                        </div>
+                        <div class="nc-recovery-row">
+                            <div class="nc-rec-emoji">✨</div>
+                            <div class="nc-rec-time">1 Year</div>
+                            <div class="nc-rec-bar-wrap">
+                                <div class="nc-rec-label">Heart disease risk cut by 50%</div>
+                                <div class="nc-rec-bar-bg"><div class="nc-rec-bar-fill" style="width:65%"></div></div>
+                            </div>
+                        </div>
+                        <div class="nc-recovery-row">
+                            <div class="nc-rec-emoji">🧬</div>
+                            <div class="nc-rec-time">5–10 Years</div>
+                            <div class="nc-rec-bar-wrap">
+                                <div class="nc-rec-label">Stroke &amp; cancer risk approaches non-smoker levels</div>
+                                <div class="nc-rec-bar-bg"><div class="nc-rec-bar-fill" style="width:90%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quote -->
+                    <div class="nc-quote-strip">
+                        <p class="nc-quote-text">Every cigarette you don't smoke is your lungs quietly thanking you — one pink cell at a time.</p>
+                        <p class="nc-quote-attr">— NeuroCure</p>
+                    </div>
+
+                    <!-- Quit Plan -->
+                    <div class="nc-section-title">🎯 Your 6-Step Quit Plan</div>
+                    <div class="nc-quit-steps">
+                        <div class="nc-quit-step">
+                            <div class="nc-step-num">1</div>
+                            <div class="nc-step-content">
+                                <div class="nc-step-title">Set a quit date — within 2 weeks</div>
+                                <div class="nc-step-desc">Not "someday." Pick a specific date. Write it down. Tell someone. Commitment becomes real when it has a deadline.</div>
+                            </div>
+                        </div>
+                        <div class="nc-quit-step">
+                            <div class="nc-step-num">2</div>
+                            <div class="nc-step-content">
+                                <div class="nc-step-title">Remove every cigarette from your space</div>
+                                <div class="nc-step-desc">Lighters, ashtrays, packs in drawers — bin them all the night before. Friction is your friend. Make it harder to smoke than not to.</div>
+                            </div>
+                        </div>
+                        <div class="nc-quit-step">
+                            <div class="nc-step-num">3</div>
+                            <div class="nc-step-content">
+                                <div class="nc-step-title">Know your triggers &amp; plan replacements</div>
+                                <div class="nc-step-desc">Coffee? → Switch to tea for a month. Stress? → 5 deep breaths + cold water. After meals? → A short walk. Map the trigger → build a bridge.</div>
+                            </div>
+                        </div>
+                        <div class="nc-quit-step">
+                            <div class="nc-step-num">4</div>
+                            <div class="nc-step-content">
+                                <div class="nc-step-title">Use NRT to manage withdrawal</div>
+                                <div class="nc-step-desc">Nicotine patches, gum, or lozenges are medically proven to reduce withdrawal symptoms by up to 60%. They let your brain slowly wean off without the smoke damage.</div>
+                            </div>
+                        </div>
+                        <div class="nc-quit-step">
+                            <div class="nc-step-num">5</div>
+                            <div class="nc-step-content">
+                                <div class="nc-step-title">Ride out the craving — it takes under 5 minutes</div>
+                                <div class="nc-step-desc">Cravings peak at 2–3 minutes then fade. Drink water. Do 10 push-ups. Chew gum. Text someone. The craving is a wave — you just have to surf it.</div>
+                            </div>
+                        </div>
+                        <div class="nc-quit-step">
+                            <div class="nc-step-num">6</div>
+                            <div class="nc-step-content">
+                                <div class="nc-step-title">Get support — you don't have to do this alone</div>
+                                <div class="nc-step-desc">Tell your close people. Apps like Smoke Free or QuitNow track your progress and show you money saved. A doctor can also prescribe Varenicline, the most effective quit medication available.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Relapse Banner -->
+                    <div class="nc-relapse-banner">
+                        <div class="nc-relapse-icon">🔄</div>
+                        <div>
+                            <div class="nc-relapse-title">Relapsed? That means you're still trying.</div>
+                            <div class="nc-relapse-text">Most people need 8–10 attempts before quitting for good. A relapse is not failure — it's data. What triggered it? What can you change next time? Every attempt rewires a little more of your brain.</div>
+                        </div>
+                    </div>
+
+                    <!-- Benefits of quitting -->
+                    <div class="nc-section-title">🌟 Life Without Cigarettes</div>
+                    <div class="nc-free-grid">
+                        <div class="nc-free-card">
+                            <div class="nc-free-emoji">🧴</div>
+                            <div>
+                                <div class="nc-free-title">Glowing Skin</div>
+                                <div class="nc-free-desc">Oxygen returns to skin cells within weeks. Complexion brightens, pores tighten, and collagen production recovers.</div>
+                            </div>
+                        </div>
+                        <div class="nc-free-card">
+                            <div class="nc-free-emoji">💰</div>
+                            <div>
+                                <div class="nc-free-title">Real Money Back</div>
+                                <div class="nc-free-desc">1 pack/day = ₹3,000–₹5,000/month. Quitting for a year puts ₹36,000–₹60,000 back in your pocket.</div>
+                            </div>
+                        </div>
+                        <div class="nc-free-card">
+                            <div class="nc-free-emoji">🏃</div>
+                            <div>
+                                <div class="nc-free-title">Stamina Returns</div>
+                                <div class="nc-free-desc">Within 12 weeks, breathing improves and physical endurance increases noticeably. Your workouts get easier.</div>
+                            </div>
+                        </div>
+                        <div class="nc-free-card">
+                            <div class="nc-free-emoji">🧠</div>
+                            <div>
+                                <div class="nc-free-title">Sharper Mind</div>
+                                <div class="nc-free-desc">Without nicotine's cycle of craving and relief, your baseline mood stabilises. Focus and memory naturally improve.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- ═══ END SMOKE PANEL ═══ -->
+
+                <!-- ═══ VAPE PANEL ═══ -->
+                <div class="nc-panel" id="ncPanelVape">
+
+                    <!-- Brain Hook -->
+                    <div class="nc-brain-hook">
+                        <div class="nc-hook-title">"It's just flavoured air." — The biggest lie in addiction.</div>
+                        <p class="nc-hook-text">Vaping was marketed as the "safe" alternative. But what you're actually inhaling is a <strong>heated aerosol of nicotine, propylene glycol, flavour chemicals, and ultrafine particles</strong> — all of which reach your lungs and bloodstream in seconds. The brain doesn't care if it smells like mango. It just knows nicotine arrived.</p>
+                        <div class="nc-truth-box">💡 Some vape devices deliver nicotine <em>faster and at higher concentrations</em> than a traditional cigarette. Modern pod systems can contain the equivalent of an entire pack of cigarettes in one cartridge.</div>
+                    </div>
+
+                    <!-- Dopamine Trap Cycle -->
+                    <div class="nc-cycle-section">
+                        <div class="nc-section-title">⚙️ Your Brain on Vape — The Same Trap, Prettier Packaging</div>
+                        <div class="nc-cycle-track">
+                            <div class="nc-cycle-node">
+                                <span class="nc-cycle-emoji">💨</span>
+                                <span class="nc-cycle-label">Vape Hit</span>
+                                <span class="nc-cycle-sub">Nicotine inhaled</span>
+                            </div>
+                            <div class="nc-cycle-arrow">→</div>
+                            <div class="nc-cycle-node">
+                                <span class="nc-cycle-emoji">🎉</span>
+                                <span class="nc-cycle-label">Dopamine Rush</span>
+                                <span class="nc-cycle-sub">Brain rewards you</span>
+                            </div>
+                            <div class="nc-cycle-arrow">→</div>
+                            <div class="nc-cycle-node danger">
+                                <span class="nc-cycle-emoji">😮‍💨</span>
+                                <span class="nc-cycle-label">Fades Fast</span>
+                                <span class="nc-cycle-sub">New baseline = lower</span>
+                            </div>
+                            <div class="nc-cycle-arrow">→</div>
+                            <div class="nc-cycle-node danger">
+                                <span class="nc-cycle-emoji">😤</span>
+                                <span class="nc-cycle-label">Crave Flavour</span>
+                                <span class="nc-cycle-sub">Reach for device</span>
+                            </div>
+                            <div class="nc-cycle-arrow">→</div>
+                            <div class="nc-cycle-node">
+                                <span class="nc-cycle-emoji">🔄</span>
+                                <span class="nc-cycle-label">Repeat</span>
+                                <span class="nc-cycle-sub">Dozens/day</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flavour Trap -->
+                    <div class="nc-section-title">🍓 The Flavour Trap — By Design</div>
+                    <p class="nc-hook-text" style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;margin-bottom:1rem;">
+                        Vape flavours exist for one reason: to make nicotine delivery more appealing and harder to quit. Every flavour is engineered to bypass your disgust reflex — so you'll vape more, more often, without noticing the addiction building.
+                    </p>
+                    <div class="nc-flavor-grid">
+                        <span class="nc-flavor-pill">🍓 Strawberry</span>
+                        <span class="nc-flavor-pill">🥭 Mango</span>
+                        <span class="nc-flavor-pill">🍉 Watermelon</span>
+                        <span class="nc-flavor-pill">🫐 Blueberry</span>
+                        <span class="nc-flavor-pill">🍋 Lemonade</span>
+                        <span class="nc-flavor-pill">❄️ Ice Mint</span>
+                        <span class="nc-flavor-pill">☕ Coffee</span>
+                        <span class="nc-flavor-pill">🍮 Vanilla Custard</span>
+                        <span class="nc-flavor-pill">🍩 Donut</span>
+                        <span class="nc-flavor-pill">🍬 Bubblegum</span>
+                        <span class="nc-flavor-pill">🥤 Cola</span>
+                        <span class="nc-flavor-pill">🍦 Caramel</span>
+                    </div>
+                    <div class="nc-flavor-warn">
+                        <strong>The real ingredients:</strong> Diacetyl (linked to "popcorn lung"), acetaldehyde, formaldehyde traces, and metal particles from coil heating — all hiding inside that "tropical punch" flavour. A pleasant taste does not make a chemical safe.
+                    </div>
+
+                    <!-- Vape vs Smoke Table -->
+                    <div class="nc-section-title">⚖️ Vape vs Smoke — Honest Comparison</div>
+                    <table class="nc-compare-table">
+                        <thead>
+                            <tr>
+                                <th>Factor</th>
+                                <th>🚬 Smoking</th>
+                                <th>💨 Vaping</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Nicotine delivery</td><td>Yes</td><td>Yes — often higher</td></tr>
+                            <tr><td>Tar in lungs</td><td>Yes — severe</td><td>No tar, but aerosol particles</td></tr>
+                            <tr><td>Cancer chemicals</td><td>70+ known</td><td>Fewer, but still present</td></tr>
+                            <tr><td>Addiction strength</td><td>High</td><td>Equal or higher (pod systems)</td></tr>
+                            <tr><td>Skin damage</td><td>Severe</td><td>Moderate — but present</td></tr>
+                            <tr><td>Long-term data</td><td>Decades of evidence</td><td>Limited — still emerging</td></tr>
+                            <tr><td>Overall verdict</td><td>Dangerous</td><td>Less harmful than smoking — <em>not safe</em></td></tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Stats -->
+                    <div class="nc-stats-grid">
+                        <div class="nc-stat-card">
+                            <div class="nc-stat-icon">🫁</div>
+                            <div>
+                                <div class="nc-stat-label">Lung Inflammation</div>
+                                <div class="nc-stat-val">Confirmed</div>
+                                <div class="nc-stat-desc">EVALI (e-cigarette lung injury) hospitalised thousands worldwide. Aerosol particles trigger chronic airway inflammation even without tobacco.</div>
+                            </div>
+                        </div>
+                        <div class="nc-stat-card">
+                            <div class="nc-stat-icon">🧠</div>
+                            <div>
+                                <div class="nc-stat-label">Brain Rewiring</div>
+                                <div class="nc-stat-val">3–4 weeks</div>
+                                <div class="nc-stat-desc">That's how fast nicotine reshapes dopamine pathways — especially dangerous for brains under 25, which are still developing.</div>
+                            </div>
+                        </div>
+                        <div class="nc-stat-card">
+                            <div class="nc-stat-icon">📱</div>
+                            <div>
+                                <div class="nc-stat-label">Usage Rate</div>
+                                <div class="nc-stat-val">200+ hits/day</div>
+                                <div class="nc-stat-desc">Average heavy vapers take over 200 puffs daily — far more than a traditional smoker. The convenience makes over-use incredibly easy.</div>
+                            </div>
+                        </div>
+                        <div class="nc-stat-card">
+                            <div class="nc-stat-icon">❤️</div>
+                            <div>
+                                <div class="nc-stat-label">Heart Rate</div>
+                                <div class="nc-stat-val">+10–15 BPM</div>
+                                <div class="nc-stat-desc">Every vape hit spikes your heart rate by 10–15 beats per minute via adrenaline. Over thousands of daily hits, your cardiovascular system takes a real toll.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recovery Timeline -->
+                    <div class="nc-section-title">🌱 What Happens When You Put It Down</div>
+                    <div class="nc-recovery-track">
+                        <div class="nc-recovery-row">
+                            <div class="nc-rec-emoji">⚡</div>
+                            <div class="nc-rec-time">20 Minutes</div>
+                            <div class="nc-rec-bar-wrap">
+                                <div class="nc-rec-label">Heart rate normalises</div>
+                                <div class="nc-rec-bar-bg"><div class="nc-rec-bar-fill" style="width:12%"></div></div>
+                            </div>
+                        </div>
+                        <div class="nc-recovery-row">
+                            <div class="nc-rec-emoji">🫧</div>
+                            <div class="nc-rec-time">48–72 Hours</div>
+                            <div class="nc-rec-bar-wrap">
+                                <div class="nc-rec-label">Nicotine fully leaves bloodstream</div>
+                                <div class="nc-rec-bar-bg"><div class="nc-rec-bar-fill" style="width:28%"></div></div>
+                            </div>
+                        </div>
+                        <div class="nc-recovery-row">
+                            <div class="nc-rec-emoji">🍃</div>
+                            <div class="nc-rec-time">2–4 Weeks</div>
+                            <div class="nc-rec-bar-wrap">
+                                <div class="nc-rec-label">Airways reduce inflammation</div>
+                                <div class="nc-rec-bar-bg"><div class="nc-rec-bar-fill" style="width:42%"></div></div>
+                            </div>
+                        </div>
+                        <div class="nc-recovery-row">
+                            <div class="nc-rec-emoji">✨</div>
+                            <div class="nc-rec-time">3 Months</div>
+                            <div class="nc-rec-bar-wrap">
+                                <div class="nc-rec-label">Skin oxygen levels normalise, glow returns</div>
+                                <div class="nc-rec-bar-bg"><div class="nc-rec-bar-fill" style="width:60%"></div></div>
+                            </div>
+                        </div>
+                        <div class="nc-recovery-row">
+                            <div class="nc-rec-emoji">🧬</div>
+                            <div class="nc-rec-time">1–2 Years</div>
+                            <div class="nc-rec-bar-wrap">
+                                <div class="nc-rec-label">Dopamine receptors largely restored</div>
+                                <div class="nc-rec-bar-bg"><div class="nc-rec-bar-fill" style="width:85%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quote -->
+                    <div class="nc-quote-strip">
+                        <p class="nc-quote-text">They made it taste like fruit so you'd forget it was a cage. You're allowed to put it down.</p>
+                        <p class="nc-quote-attr">— NeuroCure</p>
+                    </div>
+
+                    <!-- Quit Plan -->
+                    <div class="nc-section-title">🎯 Your Vape-Free Quit Plan</div>
+                    <div class="nc-quit-steps">
+                        <div class="nc-quit-step">
+                            <div class="nc-step-num">1</div>
+                            <div class="nc-step-content">
+                                <div class="nc-step-title">Set a hard quit date</div>
+                                <div class="nc-step-desc">Pick a date within 2 weeks. Charge your device one last time. Then put it in a drawer you rarely open — or give it to someone else to hold.</div>
+                            </div>
+                        </div>
+                        <div class="nc-quit-step">
+                            <div class="nc-step-num">2</div>
+                            <div class="nc-step-content">
+                                <div class="nc-step-title">Step down your nicotine strength first</div>
+                                <div class="nc-step-desc">If you're on 50mg salt nic, drop to 35mg, then 20mg, then 10mg over 4–6 weeks. Gradual reduction is more sustainable than cold turkey for heavy vapers.</div>
+                            </div>
+                        </div>
+                        <div class="nc-quit-step">
+                            <div class="nc-step-num">3</div>
+                            <div class="nc-step-content">
+                                <div class="nc-step-title">Break the hand-to-mouth habit</div>
+                                <div class="nc-step-desc">That physical gesture is half the addiction. Replace it: keep a water bottle to sip, a pen to fidget, or chewing gum nearby. Your hands need something to do.</div>
+                            </div>
+                        </div>
+                        <div class="nc-quit-step">
+                            <div class="nc-step-num">4</div>
+                            <div class="nc-step-content">
+                                <div class="nc-step-title">Use NRT patches (not another vape)</div>
+                                <div class="nc-step-desc">Nicotine patches deliver a steady, low dose that prevents withdrawal spikes — without rewarding the "hitting" behaviour. This breaks the ritual while managing the chemistry.</div>
+                            </div>
+                        </div>
+                        <div class="nc-quit-step">
+                            <div class="nc-step-num">5</div>
+                            <div class="nc-step-content">
+                                <div class="nc-step-title">Delete vape shops from your maps &amp; socials</div>
+                                <div class="nc-step-desc">Unfollow vape accounts. Remove saved locations. Temptation is mostly about ease of access — make it harder to get hold of. Environmental design beats willpower every time.</div>
+                            </div>
+                        </div>
+                        <div class="nc-quit-step">
+                            <div class="nc-step-num">6</div>
+                            <div class="nc-step-content">
+                                <div class="nc-step-title">Treat your mouth like you value it</div>
+                                <div class="nc-step-desc">Brush twice daily with a whitening toothpaste, use a tongue scraper, and drink more water. Oral self-care rituals replace the oral fixation of vaping in a genuinely healthy way.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Relapse Banner -->
+                    <div class="nc-relapse-banner">
+                        <div class="nc-relapse-icon">🔄</div>
+                        <div>
+                            <div class="nc-relapse-title">Vaped after quitting? You haven't failed.</div>
+                            <div class="nc-relapse-text">Vaping is specifically designed to be more accessible and socially acceptable than smoking — which makes quitting harder, not a reflection of your willpower. Most people relapse 2–3 times before going clean. Each attempt teaches you something. Keep going.</div>
+                        </div>
+                    </div>
+
+                    <!-- Benefits -->
+                    <div class="nc-section-title">🌟 Your Life Without the Device</div>
+                    <div class="nc-free-grid">
+                        <div class="nc-free-card">
+                            <div class="nc-free-emoji">🧴</div>
+                            <div>
+                                <div class="nc-free-title">Skin Glow Returns</div>
+                                <div class="nc-free-desc">Nicotine constricts skin blood vessels. Within weeks of quitting, circulation improves and your face looks noticeably more alive.</div>
+                            </div>
+                        </div>
+                        <div class="nc-free-card">
+                            <div class="nc-free-emoji">💸</div>
+                            <div>
+                                <div class="nc-free-title">Save ₹2,000–₹6,000/month</div>
+                                <div class="nc-free-desc">Premium vape devices, pods, and liquids add up fast. That's a skincare routine, gym membership, or a short trip every month.</div>
+                            </div>
+                        </div>
+                        <div class="nc-free-card">
+                            <div class="nc-free-emoji">🧠</div>
+                            <div>
+                                <div class="nc-free-title">Mood Stability</div>
+                                <div class="nc-free-desc">The cycle of highs and lows driven by nicotine spikes disappears. Your natural dopamine baseline restores over 4–8 weeks.</div>
+                            </div>
+                        </div>
+                        <div class="nc-free-card">
+                            <div class="nc-free-emoji">🫁</div>
+                            <div>
+                                <div class="nc-free-title">Breathing Eases</div>
+                                <div class="nc-free-desc">Airway inflammation reduces within weeks. Deep breaths stop feeling like work. Your lungs are more resilient than you think.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- ═══ END VAPE PANEL ═══ -->
+
+                <!-- ═══ CLEAN PANEL ═══ -->
+                <div class="nc-panel" id="ncPanelClean">
+                    <div class="nc-clean-hero">
+                        <div class="nc-clean-icon">🌿</div>
+                        <div class="nc-clean-title">Your brain is already winning.</div>
+                        <p class="nc-clean-sub">Choosing to stay nicotine-free is one of the best decisions you can make for your skin, brain, heart, and lungs. Here's what you're protecting every single day.</p>
+                        <div class="nc-clean-badges">
+                            <span class="nc-clean-badge">✅ Natural dopamine</span>
+                            <span class="nc-clean-badge">✅ Healthy lungs</span>
+                            <span class="nc-clean-badge">✅ Glowing skin</span>
+                            <span class="nc-clean-badge">✅ Stable mood</span>
+                        </div>
+                    </div>
+
+                    <div class="nc-section-title">🧠 What Your Brain Looks Like Without Nicotine</div>
+                    <div class="nc-stats-grid">
+                        <div class="nc-stat-card">
+                            <div class="nc-stat-icon">🎯</div>
+                            <div>
+                                <div class="nc-stat-label">Dopamine System</div>
+                                <div class="nc-stat-val">Naturally balanced</div>
+                                <div class="nc-stat-desc">Your reward system fires from real experiences — food, achievement, connection — without being hijacked by a chemical loop.</div>
+                            </div>
+                        </div>
+                        <div class="nc-stat-card">
+                            <div class="nc-stat-icon">🫁</div>
+                            <div>
+                                <div class="nc-stat-label">Lung Function</div>
+                                <div class="nc-stat-val">Full capacity</div>
+                                <div class="nc-stat-desc">Your cilia sweep debris normally, your alveoli exchange oxygen freely, and your lungs age at the natural rate — not an accelerated one.</div>
+                            </div>
+                        </div>
+                        <div class="nc-stat-card">
+                            <div class="nc-stat-icon">🧴</div>
+                            <div>
+                                <div class="nc-stat-label">Skin Health</div>
+                                <div class="nc-stat-val">Full oxygen flow</div>
+                                <div class="nc-stat-desc">Without nicotine constricting vessels, your skin receives full blood flow. Collagen production stays intact, keeping your complexion vibrant.</div>
+                            </div>
+                        </div>
+                        <div class="nc-stat-card">
+                            <div class="nc-stat-icon">❤️</div>
+                            <div>
+                                <div class="nc-stat-label">Heart Risk</div>
+                                <div class="nc-stat-val">Baseline low</div>
+                                <div class="nc-stat-desc">No nicotine means no artificial adrenaline spikes. Your resting heart rate stays lower, blood pressure stays healthier, arteries stay flexible.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="nc-quote-strip">
+                        <p class="nc-quote-text">The cleanest high is waking up knowing your brain is entirely your own.</p>
+                        <p class="nc-quote-attr">— NeuroCure</p>
+                    </div>
+                </div>
+                <!-- ═══ END CLEAN PANEL ═══ -->
+
+            </div>
+        </div>
+        <!-- ═══ END NEUROCURE PAGE ═══ -->
+
+        <!-- FormaFace Page -->
+        <div class="content-page" id="formaface">
+            <div class="container ff-page">
+
+                <div class="ff-hero">
+                    <div class="ff-hero-badge">✨ FormaFace</div>
+                    <h1 class="ff-hero-title">Your Face.<br><span>Your Style.</span></h1>
+                    <p class="ff-hero-sub">Upload or take a clear front-facing photo. Our AI analyses your face shape, undertone, and features — then recommends hairstyles, beard styles, colours, and outfits from the malemodel dataset.</p>
+                    <div class="ff-hero-pills">
+                        <span class="ff-hero-pill">📸 MediaPipe Scan</span>
+                        <span class="ff-hero-pill">🎯 Personalised Picks</span>
+                        <span class="ff-hero-pill">💈 Grooming Tips</span>
+                    </div>
+                </div>
+
+                <div class="ff-connection" id="ffConnection" hidden></div>
+
+                <div class="ff-upload-wrap" id="ffUploadWrap">
+                    <img class="ff-upload-preview" id="ffPreview" alt="Preview">
+                    <video id="ffCamera" class="ff-camera-live" autoplay playsinline muted style="display:none"></video>
+                    <canvas id="ffCanvas" style="display:none"></canvas>
+                    <div class="ff-upload-placeholder" id="ffUploadPlaceholder">
+                        <div class="ff-upload-icon">📷</div>
+                        <div class="ff-upload-title">Tap or drag a photo here</div>
+                        <div class="ff-upload-hint">Front-facing · good lighting · JPG or PNG · max 12 MB</div>
+                    </div>
+                    <input type="file" id="ffFileInput" accept="image/*" style="display:none">
+                </div>
+
+                <div class="ff-actions">
+                    <button class="ff-btn-camera" id="ffCameraBtn" type="button">📷 Take Photo</button>
+                    <button class="ff-btn-capture" id="ffCaptureBtn" type="button" style="display:none">Capture</button>
+                    <button class="ff-btn-primary" id="ffAnalyzeBtn" type="button">Analyse My Face</button>
+                    <button class="ff-btn-ghost" id="ffResetBtn" type="button">Clear</button>
+                </div>
+
+                <div class="ff-status" id="ffStatus"></div>
+
+                <div class="ff-results" id="ffResults"></div>
+
+            </div>
+        </div>
+        <!-- ═══ END FORMAFACE PAGE ═══ -->
+
+    </main>
+
+    <script src="/assets/skinora-api.js?v=4"></script>
+    <script src="script.js?v=4"></script>
+    <script src="neurocure-tracker.js"></script>
+    <script src="formaface.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (window.SkinoraAPI && !SkinoraAPI.requireAuth('/login/')) return;
+        if (window.SkinoraAPI) setTimeout(function () { SkinoraAPI.initDashboard('male'); }, 150);
+    });
+    </script>
+</body>
+</html>

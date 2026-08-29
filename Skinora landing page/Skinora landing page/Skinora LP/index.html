@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skinora — Unlock Your Confident Self-Presentation</title>
+  <script>
+    (function () {
+      var host = location.hostname;
+      var port = location.port;
+      if (location.protocol === 'file:') return;
+      if ((host === 'localhost' || host === '127.0.0.1') && port && port !== '8000') {
+        location.replace('http://localhost:8000/');
+      }
+    })();
+  </script>
+  <meta name="description" content="Skinora fuses aesthetic coaching and preventive health into one personalized platform. Track, transform, and thrive." />
+ 
+  <!-- Google Fonts: Cormorant Garamond (serif display) + DM Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+ 
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+ 
+  <!-- =============================================
+       HEADER / NAVBAR
+  ============================================= -->
+  <header class="navbar" id="navbar">
+    <div class="nav-inner container">
+      <a href="#" class="nav-logo">Skinora</a>
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#features">Features</a>
+        <a href="#dashboards">Dashboards</a>
+        <a href="#how-it-works">How It Works</a>
+      </nav>
+      <a href="/login/" class="btn btn-primary nav-cta">Get Started</a>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+ 
+  <main>
+ 
+    <!-- =============================================
+         HERO SECTION
+    ============================================= -->
+    <section class="hero" id="home">
+      <div class="hero-inner container">
+        <div class="hero-text">
+          <span class="eyebrow">Holistic Wellness &amp; Appearance Platform</span>
+          <h1 class="hero-headline">Unlock Your<br /><em>Confident</em><br />Self-Presentation</h1>
+          <p class="hero-sub">
+            Skinora fuses personalised aesthetic coaching with preventive health science — so you look, feel, and live better every single day.
+          </p>
+          <div class="hero-actions">
+            <a href="/login/" class="btn btn-primary">Get Started</a>
+            <a href="#how-it-works" class="btn btn-ghost">See How It Works</a>
+          </div>
+          <div class="hero-trust">
+            <span class="trust-dot"></span>
+            <p>Trusted by 14,000+ members across 38 countries</p>
+          </div>
+        </div>
+ 
+        <div class="hero-visual">
+          <!--
+            ============================================================
+            SWAP THIS IMAGE
+            Replace the src below with your hero lifestyle/wellness photo.
+            Recommended size: 900 × 1100 px, portrait orientation.
+            ============================================================
+          -->
+          <div class="hero-image-frame">
+            <img
+              src="image.png"
+              class="hero-img"
+              loading="eager"
+            />
+            <!-- <div class="hero-badge"> -->
+              <!-- <span class="badge-icon">✦</span>
+              <div>
+                <strong>AI-Personalised</strong>
+                <span>Plans for your body &amp; goals</span> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+      <!-- Decorative background shapes -->
+      <div class="hero-shape hero-shape--1" aria-hidden="true"></div>
+      <div class="hero-shape hero-shape--2" aria-hidden="true"></div>
+    </section>
+ 
+    <!-- =============================================
+         SOCIAL PROOF / AS FEATURED IN
+    ============================================= -->
+    <section class="social-proof" aria-label="Featured in">
+      <div class="container">
+        <p class="proof-label">As featured in</p>
+        <!--
+          ============================================================
+          SWAP THIS DATA → script.js → mediaLogos array
+          Publication names / logo images are rendered by JS below.
+          ============================================================
+        -->
+        <div class="proof-logos" id="proofLogos"></div>
+      </div>
+    </section>
+ 
+    <!-- =============================================
+         CORE FEATURES GRID
+    ============================================= -->
+    <section class="features" id="features">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Platform Pillars</span>
+          <h2>Everything you need,<br /><em>all in one place</em></h2>
+          <p class="section-sub">Four interconnected pillars designed to work together — not in isolation.</p>
+        </div>
+        <!--
+          ============================================================
+          SWAP THIS DATA → script.js → featuresData array
+          ============================================================
+        -->
+        <div class="features-grid" id="featuresGrid"></div>
+      </div>
+    </section>
+ 
+    <!-- =============================================
+         DUAL DASHBOARD SHOWCASE
+    ============================================= -->
+    <section class="dashboards" id="dashboards">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Role-Specific Dashboards</span>
+          <h2>Built around <em>you</em>,<br />not the average user</h2>
+          <p class="section-sub">Switch between the two personalised interfaces below.</p>
+        </div>
+ 
+        <div class="dashboard-tabs">
+          <button class="tab-btn active" data-tab="women" aria-pressed="true">For Women</button>
+          <button class="tab-btn" data-tab="men" aria-pressed="false">For Men</button>
+        </div>
+ 
+        <!--
+          ============================================================
+          SWAP THIS DATA → script.js → dashboardData object
+          ============================================================
+        -->
+        <div class="dashboard-panels" id="dashboardPanels"></div>
+      </div>
+    </section>
+ 
+    <!-- =============================================
+         HOW SKINORA WORKS — TIMELINE
+    ============================================= -->
+    <section class="how-it-works" id="how-it-works">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Your Journey</span>
+          <h2>Up and running<br /><em>in three steps</em></h2>
+        </div>
+        <!--
+          ============================================================
+          SWAP THIS DATA → script.js → stepsData array
+          ============================================================
+        -->
+        <div class="steps-timeline" id="stepsTimeline"></div>
+      </div>
+    </section>
+ 
+    <!-- =============================================
+         SUCCESS STORIES / TESTIMONIALS
+    ============================================= -->
+    <section class="testimonials" id="testimonials">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Real Transformations</span>
+          <h2>Words from our<br /><em>Skinora community</em></h2>
+        </div>
+        <!--
+          ============================================================
+          SWAP THIS DATA → script.js → testimonialsData array
+          ============================================================
+        -->
+        <div class="testimonials-grid" id="testimonialsGrid"></div>
+      </div>
+    </section>
+ 
+    <!-- =============================================
+         FINAL CTA BANNER
+    ============================================= -->
+    <section class="cta-banner" id="cta-banner">
+      <div class="container cta-inner">
+        <div class="cta-text">
+          <h2>Ready to Transform<br /><em>Your Lifestyle?</em></h2>
+          <p>Join thousands who've already started their journey. It takes less than two minutes to set up your free personalised dashboard.</p>
+        </div>
+        <a href="/login/" class="btn btn-light btn-lg">Get Started — It's Free</a>
+      </div>
+      <div class="cta-shape" aria-hidden="true"></div>
+    </section>
+ 
+  </main>
+ 
+  <!-- =============================================
+       FOOTER
+  ============================================= -->
+  <footer class="footer" id="footer">
+    <div class="container footer-grid">
+ 
+      <div class="footer-brand">
+        <a href="#" class="nav-logo footer-logo">Skinora</a>
+        <p>Holistic health, wellness, and appearance — personalised for you.</p>
+        <!--
+          ============================================================
+          SWAP THIS DATA → script.js → socialLinks array
+          ============================================================
+        -->
+        <div class="footer-social" id="footerSocial"></div>
+      </div>
+ 
+      <div class="footer-links">
+        <h4>Modules</h4>
+        <ul id="footerModuleLinks"></ul>
+        <!--
+          ============================================================
+          SWAP THIS DATA → script.js → footerModules array
+          ============================================================
+        -->
+      </div>
+ 
+      <div class="footer-links">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+ 
+      <div class="footer-newsletter">
+        <h4>Join the waitlist</h4>
+        <p>Be first to access new features and exclusive wellness content.</p>
+        <form class="newsletter-form" id="newsletterForm" novalidate>
+          <div class="newsletter-row">
+            <input
+              type="email"
+              id="newsletterEmail"
+              placeholder="Your email address"
+              autocomplete="email"
+              required
+              aria-label="Email address for newsletter"
+            />
+            <button type="submit" class="btn btn-primary btn-sm">Subscribe</button>
+          </div>
+          <p class="newsletter-msg" id="newsletterMsg" aria-live="polite"></p>
+        </form>
+      </div>
+ 
+    </div>
+ 
+    <div class="footer-bottom container">
+      <p>&copy; <span id="currentYear"></span> Skinora. All rights reserved.</p>
+      <p>Crafted with intention.</p>
+    </div>
+  </footer>
+ 
+  <script src="script.js"></script>
+</body>
+</html>
+ 

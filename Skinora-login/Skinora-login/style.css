@@ -1,0 +1,732 @@
+/* ═══════════════════════════════════════════════════════════════════
+   SKINORA — STYLESHEET
+   Palette:
+     --mauve-whisper    #E1CECE
+     --antique-rose     #E5BDBA
+     --blushed-rose     #F1D4CE
+     --antique-petal    #F3E5DF
+     --porcelain-cream  #F6EFEA
+     --sage-verdure     #CDC8BC
+     --laurel-veil      #979E8D
+     --bay-leaf-moss    #727C6C
+     --aged-brass       #BA9E7B
+     --brushed-bronze   #A0825F
+     --antique-gold     #C7AC85
+     --champagne-glow   #EFE0C9
+     --parchment-ivory  #EFE6D8
+     --smoky-taupe      #B0A59A
+════════════════════════════════════════════════════════════════════ */
+ 
+/* ─────────────────────────────────────────
+   RESET & BASE
+───────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+ 
+:root {
+  --mauve-whisper:   #E1CECE;
+  --antique-rose:    #E5BDBA;
+  --blushed-rose:    #F1D4CE;
+  --antique-petal:   #F3E5DF;
+  --porcelain-cream: #F6EFEA;
+  --sage-verdure:    #CDC8BC;
+  --laurel-veil:     #979E8D;
+  --bay-leaf-moss:   #727C6C;
+  --aged-brass:      #BA9E7B;
+  --brushed-bronze:  #A0825F;
+  --antique-gold:    #C7AC85;
+  --champagne-glow:  #EFE0C9;
+  --parchment-ivory: #EFE6D8;
+  --smoky-taupe:     #B0A59A;
+ 
+  /* Dark card surface tokens */
+  --card-bg:         rgba(28, 26, 24, 0.72);
+  --card-border:     rgba(160, 130, 95, 0.28);
+  --card-inset-top:  rgba(255, 255, 255, 0.06);
+  --card-inset-bot:  rgba(160, 130, 95, 0.18);
+  --input-bg:        rgba(15, 14, 12, 0.45);
+  --input-icon-bg:   rgba(15, 14, 12, 0.55);
+}
+ 
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bay-leaf-moss);
+  font-family: 'Jost', sans-serif;
+}
+ 
+/* ─────────────────────────────────────────
+   CANVAS — ABSOLUTE BACKGROUND LAYER
+───────────────────────────────────────── */
+#bg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100vw !important;
+  height: 100vh !important;
+}
+ 
+/* ─────────────────────────────────────────
+   UI LAYER
+───────────────────────────────────────── */
+#ui-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+ 
+/* ─────────────────────────────────────────
+   BRAND MARK
+───────────────────────────────────────── */
+.server-hint {
+  display: none;
+  text-align: center;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.78rem;
+  color: var(--porcelain-cream);
+  background: rgba(114, 124, 108, 0.85);
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.server-hint.show { display: block; }
+.server-hint a { color: var(--champagne-glow); font-weight: 600; }
+
+.brand-mark {
+  text-align: center;
+  margin-bottom: 1.6rem;
+  pointer-events: none;
+  user-select: none;
+}
+ 
+.brand-mark .logotype {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  letter-spacing: 0.25em;
+  color: var(--porcelain-cream);
+  text-shadow:
+    0 0 40px rgba(239, 224, 201, 0.55),
+    0 2px 12px rgba(160, 130, 95, 0.35);
+  line-height: 1;
+}
+ 
+.brand-mark .tagline {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 0.72rem;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--champagne-glow);
+  opacity: 0.78;
+  margin-top: 0.35rem;
+}
+ 
+/* ─────────────────────────────────────────
+   GLASSMORPHIC LOGIN CARD  — DARK EDITION
+   Background: near-black at 72% opacity
+   with backdrop-filter so the 3D scene
+   still refracts cleanly behind the card.
+───────────────────────────────────────── */
+.glass-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--card-bg);
+  backdrop-filter: blur(28px) saturate(1.6) brightness(0.72);
+  -webkit-backdrop-filter: blur(28px) saturate(1.6) brightness(0.72);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 2.6rem 2.4rem 2.2rem;
+  box-shadow:
+    0 10px 56px rgba(10, 9, 8, 0.58),
+    0 1px 0 var(--card-inset-top) inset,
+    0 -1px 0 var(--card-inset-bot) inset;
+  transform-style: preserve-3d;
+  transition: transform 0.12s ease-out, box-shadow 0.12s ease-out;
+  will-change: transform;
+}
+ 
+.glass-card:hover {
+  box-shadow:
+    0 18px 72px rgba(10, 9, 8, 0.72),
+    0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 -1px 0 rgba(160, 130, 95, 0.24) inset;
+}
+ 
+/* ─── Card header ─── */
+.card-header-custom {
+  text-align: center;
+  margin-bottom: 1.8rem;
+}
+ 
+.card-header-custom .signin-label {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 0.68rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--aged-brass);
+  margin-bottom: 0.5rem;
+}
+ 
+.card-header-custom h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: 1.85rem;
+  letter-spacing: 0.06em;
+  color: var(--porcelain-cream);
+  line-height: 1.1;
+}
+ 
+.card-header-custom .divider {
+  width: 36px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--antique-gold), transparent);
+  margin: 0.9rem auto 0;
+}
+ 
+/* ─── Input groups ─── */
+.form-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sage-verdure);
+  font-weight: 400;
+  margin-bottom: 0.38rem;
+}
+ 
+.input-group {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(160, 130, 95, 0.40);  /* Brushed Bronze */
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+ 
+.input-group:focus-within {
+  border-color: rgba(160, 130, 95, 0.85);
+  box-shadow: 0 0 0 3px rgba(160, 130, 95, 0.14);
+}
+ 
+.input-group-text {
+  background: var(--input-icon-bg);
+  border: none;
+  color: var(--aged-brass);   /* Aged Brass icons */
+  font-size: 0.82rem;
+  padding: 0 0.9rem;
+}
+ 
+.form-control {
+  background: var(--input-bg);
+  border: none;
+  color: var(--porcelain-cream);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 0.88rem;
+  letter-spacing: 0.04em;
+  padding: 0.72rem 0.85rem;
+  outline: none;
+}
+ 
+.form-control::placeholder {
+  color: rgba(176, 165, 154, 0.45);
+  font-style: italic;
+}
+ 
+.form-control:focus {
+  background: rgba(15, 14, 12, 0.60);
+  box-shadow: none;
+  color: var(--porcelain-cream);
+}
+ 
+/* Autofill override */
+.form-control:-webkit-autofill,
+.form-control:-webkit-autofill:hover,
+.form-control:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--porcelain-cream);
+  -webkit-box-shadow: 0 0 0 1000px rgba(20, 18, 16, 0.75) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+ 
+/* Password visibility toggle */
+.btn-pw-toggle {
+  background: var(--input-icon-bg);
+  border: none;
+  color: var(--aged-brass);
+  padding: 0 0.9rem;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+ 
+.btn-pw-toggle:hover {
+  color: var(--antique-gold);
+}
+ 
+/* ─── Remember / Forgot row ─── */
+.remember-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+ 
+.form-check-label {
+  font-size: 0.76rem;
+  color: var(--smoky-taupe);
+  font-weight: 300;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+}
+ 
+.form-check-input {
+  border-color: rgba(160, 130, 95, 0.5);
+  background-color: transparent;
+  width: 1em;
+  height: 1em;
+  cursor: pointer;
+}
+ 
+.form-check-input:checked {
+  background-color: var(--brushed-bronze);
+  border-color: var(--brushed-bronze);
+}
+ 
+.form-check-input:focus {
+  box-shadow: 0 0 0 2px rgba(160, 130, 95, 0.2);
+}
+ 
+.forgot-link {
+  font-size: 0.76rem;
+  color: var(--smoky-taupe);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  font-weight: 300;
+  transition: color 0.2s;
+}
+ 
+.forgot-link:hover {
+  color: var(--antique-gold);
+}
+ 
+/* ─── Login button ─── */
+.btn-login {
+  width: 100%;
+  padding: 0.82rem;
+  margin-top: 1.6rem;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--brushed-bronze) 0%, var(--antique-gold) 60%, var(--aged-brass) 100%);
+  color: var(--parchment-ivory);
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+  font-size: 0.8rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 24px rgba(160, 130, 95, 0.42);
+}
+ 
+.btn-login::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, transparent 60%);
+  pointer-events: none;
+}
+ 
+.btn-login:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 30px rgba(160, 130, 95, 0.55);
+}
+ 
+.btn-login:active {
+  transform: translateY(0px);
+  box-shadow: 0 3px 14px rgba(160, 130, 95, 0.32);
+}
+ 
+/* ─── Card footer ─── */
+.card-footer-custom {
+  text-align: center;
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(160, 130, 95, 0.16);
+}
+ 
+.card-footer-custom p {
+  font-size: 0.72rem;
+  color: var(--smoky-taupe);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+ 
+.card-footer-custom a {
+  color: var(--antique-gold);
+  text-decoration: none;
+  font-weight: 400;
+}
+ 
+.card-footer-custom a:hover {
+  text-decoration: underline;
+}
+ 
+/* ─── Pulsing hint dots ─── */
+.hint-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--antique-gold);
+  opacity: 0.55;
+  display: inline-block;
+  margin: 0 3px;
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+ 
+.hint-dot:nth-child(2) { animation-delay: 0.4s; }
+.hint-dot:nth-child(3) { animation-delay: 0.8s; }
+ 
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.25; transform: scale(1); }
+  50%       { opacity: 0.75; transform: scale(1.4); }
+}
+ 
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar        { width: 4px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: var(--laurel-veil); border-radius: 4px; }
+ 
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .glass-card { transition: none !important; }
+  .hint-dot   { animation: none !important; }
+}
+ 
+ 
+/* ═══════════════════════════════════════════════════════════════════
+   GENDER SELECTION MODAL
+════════════════════════════════════════════════════════════════════ */
+ 
+/* ─── Full-screen overlay backdrop ─── */
+.gender-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+ 
+  /* Hidden by default */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+ 
+  /* Frosted dark backdrop */
+  background: rgba(10, 9, 8, 0.62);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+ 
+  transition: opacity 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+              visibility 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+}
+ 
+.gender-overlay.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+ 
+/* ─── Modal panel ─── */
+.gender-modal {
+  width: 100%;
+  max-width: 500px;
+  background: rgba(22, 20, 18, 0.88);
+  backdrop-filter: blur(32px) saturate(1.5) brightness(0.68);
+  -webkit-backdrop-filter: blur(32px) saturate(1.5) brightness(0.68);
+  border: 1px solid rgba(160, 130, 95, 0.30);
+  border-radius: 24px;
+  padding: 2.8rem 2.6rem 2.4rem;
+  box-shadow:
+    0 24px 80px rgba(8, 7, 6, 0.72),
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 -1px 0 rgba(160, 130, 95, 0.20) inset;
+ 
+  /* Enter animation */
+  transform: translateY(28px) scale(0.97);
+  transition: transform 0.42s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+ 
+.gender-overlay.is-visible .gender-modal {
+  transform: translateY(0) scale(1);
+}
+ 
+/* ─── Modal header ─── */
+.gender-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+ 
+.gender-eyebrow {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 0.66rem;
+  letter-spacing: 0.40em;
+  text-transform: uppercase;
+  color: var(--aged-brass);
+  margin-bottom: 0.55rem;
+}
+ 
+.gender-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: 1.9rem;
+  letter-spacing: 0.04em;
+  color: var(--porcelain-cream);
+  line-height: 1.15;
+  margin-bottom: 0.65rem;
+}
+ 
+.gender-subtitle {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 0.78rem;
+  line-height: 1.65;
+  color: var(--smoky-taupe);
+  letter-spacing: 0.02em;
+  margin-bottom: 0;
+}
+ 
+.gender-divider {
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--antique-gold), transparent);
+  margin: 1.1rem auto 0;
+}
+ 
+/* ─── Option cards row ─── */
+.gender-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+ 
+/* ─── Individual gender card ─── */
+.gender-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1.8rem 1rem 1.5rem;
+  background: rgba(15, 14, 12, 0.50);
+  border: 1px solid rgba(160, 130, 95, 0.28);
+  border-radius: 16px;
+  cursor: pointer;
+  text-align: center;
+  transition:
+    background   0.22s ease,
+    border-color 0.22s ease,
+    transform    0.18s ease,
+    box-shadow   0.22s ease;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+ 
+.gender-card:hover {
+  background: rgba(30, 27, 24, 0.70);
+  border-color: rgba(160, 130, 95, 0.55);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(8, 7, 6, 0.45);
+}
+ 
+.gender-card:focus-visible {
+  box-shadow: 0 0 0 3px rgba(199, 172, 133, 0.40);
+}
+ 
+/* Selected state */
+.gender-card.is-selected {
+  background: rgba(40, 34, 26, 0.82);
+  border-color: var(--antique-gold);
+  box-shadow:
+    0 0 0 1px var(--antique-gold),
+    0 10px 34px rgba(160, 130, 95, 0.28);
+}
+ 
+/* ─── Icon circle ─── */
+.gender-card-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+ 
+.female-icon {
+  background: radial-gradient(circle at 38% 36%, rgba(241, 212, 206, 0.22), rgba(186, 158, 123, 0.10));
+  color: var(--blushed-rose);
+  border: 1px solid rgba(241, 212, 206, 0.25);
+  box-shadow: 0 0 18px rgba(241, 212, 206, 0.14);
+}
+ 
+.male-icon {
+  background: radial-gradient(circle at 38% 36%, rgba(205, 200, 188, 0.20), rgba(114, 124, 108, 0.12));
+  color: var(--sage-verdure);
+  border: 1px solid rgba(205, 200, 188, 0.22);
+  box-shadow: 0 0 18px rgba(205, 200, 188, 0.12);
+}
+ 
+.gender-card.is-selected .gender-card-icon {
+  transform: scale(1.08);
+}
+ 
+.gender-card.is-selected .female-icon {
+  box-shadow: 0 0 28px rgba(241, 212, 206, 0.32);
+}
+ 
+.gender-card.is-selected .male-icon {
+  box-shadow: 0 0 28px rgba(205, 200, 188, 0.28);
+}
+ 
+/* ─── Card label & sub-text ─── */
+.gender-card-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
+  color: var(--porcelain-cream);
+  line-height: 1;
+}
+ 
+.gender-card-sub {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 0.68rem;
+  line-height: 1.55;
+  color: var(--smoky-taupe);
+  letter-spacing: 0.02em;
+}
+ 
+/* ─── Check badge (visible when selected) ─── */
+.gender-card-check {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--antique-gold);
+  color: rgba(12, 10, 8, 0.90);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.62rem;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.2s ease, transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+ 
+.gender-card.is-selected .gender-card-check {
+  opacity: 1;
+  transform: scale(1);
+}
+ 
+/* ─── Skip row ─── */
+.gender-skip-row {
+  text-align: center;
+  margin-bottom: 1.4rem;
+}
+ 
+.gender-skip {
+  background: none;
+  border: none;
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--smoky-taupe);
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 0.3rem 0.5rem;
+  text-decoration: none;
+}
+ 
+.gender-skip:hover {
+  color: var(--antique-gold);
+}
+ 
+/* ─── Continue button ─── */
+.btn-gender-continue {
+  width: 100%;
+  padding: 0.86rem;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--brushed-bronze) 0%, var(--antique-gold) 60%, var(--aged-brass) 100%);
+  color: var(--parchment-ivory);
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+  font-size: 0.8rem;
+  letter-spacing: 0.30em;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s, filter 0.2s;
+  box-shadow: 0 4px 24px rgba(160, 130, 95, 0.38);
+}
+ 
+.btn-gender-continue::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, transparent 55%);
+  pointer-events: none;
+}
+ 
+/* Disabled state */
+.btn-gender-continue:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+  filter: saturate(0.5);
+  transform: none;
+  box-shadow: none;
+}
+ 
+.btn-gender-continue:not(:disabled):hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 30px rgba(160, 130, 95, 0.52);
+}
+ 
+.btn-gender-continue:not(:disabled):active {
+  transform: translateY(0);
+  box-shadow: 0 3px 14px rgba(160, 130, 95, 0.30);
+}
+ 
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .gender-overlay,
+  .gender-modal,
+  .gender-card,
+  .gender-card-check,
+  .btn-gender-continue { transition: none !important; }
+}
